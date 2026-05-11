@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ventura AI — Professional Business Plans in Seconds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0b;
+    --cream: #f7f4ee;
+    --warm: #ede9e0;
+    --accent: #1a3a5c;
+    --accent2: #c8923a;
+    --muted: #7a7670;
+    --border: #ddd9d0;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem; height: 64px;
+    background: rgba(247,244,238,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 500; color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo-mark {
+    width: 32px; height: 32px; background: var(--accent);
+    border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  }
+  .nav-logo-mark svg { width: 16px; height: 16px; fill: white; }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-links a { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    font-size: 13px; font-weight: 500; padding: 8px 20px;
+    background: var(--accent); color: white; border-radius: 6px;
+    text-decoration: none; transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 80px 3rem 0;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-left { padding-top: 2rem; }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent2);
+    background: rgba(200,146,58,0.1); padding: 5px 12px;
+    border-radius: 20px; margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; }
+
+  .hero-h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 5vw, 62px);
+    font-weight: 500; line-height: 1.1;
+    letter-spacing: -0.02em; color: var(--ink);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-h1 em { font-style: italic; color: var(--accent); }
+  .hero-h1 .line2 { display: block; }
+
+  .hero-sub {
+    font-size: 17px; font-weight: 300; color: var(--muted);
+    line-height: 1.7; margin-bottom: 2.5rem; max-width: 480px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 32px; background: var(--accent); color: white;
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+    border-radius: 8px; text-decoration: none; transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(26,58,92,0.25);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(26,58,92,0.35); }
+  .btn-primary svg { width: 16px; height: 16px; }
+  .btn-secondary {
+    font-size: 14px; font-weight: 400; color: var(--muted);
+    text-decoration: none; display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--ink); }
+
+  .hero-trust {
+    margin-top: 2.5rem; display: flex; align-items: center; gap: 1.5rem;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .trust-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); }
+  .trust-item svg { width: 14px; height: 14px; color: var(--accent2); }
+  .trust-divider { width: 1px; height: 16px; background: var(--border); }
+
+  /* HERO RIGHT — DOCUMENT MOCKUP */
+  .hero-right {
+    position: relative;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .doc-card {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+    overflow: hidden;
+    transform: rotate(1.5deg);
+    transition: transform 0.4s ease;
+  }
+  .doc-card:hover { transform: rotate(0deg); }
+  .doc-header {
+    background: var(--accent); padding: 2rem 2rem 1.5rem;
+    color: white;
+  }
+  .doc-header-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.6; margin-bottom: 8px; }
+  .doc-header-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; margin-bottom: 4px; }
+  .doc-header-sub { font-size: 12px; opacity: 0.65; }
+  .doc-body { padding: 1.5rem 2rem; }
+  .doc-section { margin-bottom: 1.25rem; }
+  .doc-section-title {
+    font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--warm);
+  }
+  .doc-line { height: 8px; background: var(--warm); border-radius: 4px; margin-bottom: 6px; }
+  .doc-line.short { width: 65%; }
+  .doc-line.med { width: 82%; }
+  .doc-line.long { width: 95%; }
+  .doc-line.accent { background: rgba(26,58,92,0.1); }
+  .doc-badge {
+    position: absolute; top: -16px; right: -16px;
+    width: 80px; height: 80px; background: var(--accent2);
+    border-radius: 50%; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; color: white;
+    box-shadow: 0 8px 24px rgba(200,146,58,0.4);
+    transform: rotate(-8deg);
+  }
+  .doc-badge-price { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; line-height: 1; }
+  .doc-badge-label { font-size: 9px; font-weight: 500; opacity: 0.85; }
+  .doc-float {
+    position: absolute; bottom: -20px; left: -24px;
+    background: white; border-radius: 12px;
+    padding: 12px 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    display: flex; align-items: center; gap: 10px;
+    animation: float 3s ease-in-out infinite;
+  }
+  .doc-float-icon { width: 32px; height: 32px; background: #EAF3DE; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .doc-float-text { font-size: 12px; font-weight: 500; color: var(--ink); }
+  .doc-float-sub { font-size: 10px; color: var(--muted); }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+  /* ── LOGOS BAR ── */
+  .logos-bar {
+    background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 1.25rem 3rem; text-align: center;
+  }
+  .logos-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+  .logos-row { display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+  .logo-pill {
+    font-size: 13px; font-weight: 500; color: var(--muted);
+    padding: 6px 16px; border: 1px solid var(--border); border-radius: 20px;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .section { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
+  .section-eyebrow { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2); font-weight: 500; margin-bottom: 1rem; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 44px); font-weight: 500;
+    line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem;
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .section-sub { font-size: 16px; font-weight: 300; color: var(--muted); line-height: 1.7; max-width: 520px; }
+
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; }
+  .step-card {
+    background: var(--white); border-radius: 16px; padding: 2rem;
+    border: 1px solid var(--border); position: relative; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .step-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+  .step-num {
+    font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 700;
+    color: var(--warm); position: absolute; top: -8px; right: 16px; line-height: 1;
+    user-select: none;
+  }
+  .step-icon { font-size: 28px; margin-bottom: 1.25rem; }
+  .step-title { font-size: 16px; font-weight: 500; margin-bottom: 8px; color: var(--ink); }
+  .step-desc { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.6; }
+
+  /* ── WHAT YOU GET ── */
+  .features-section { background: var(--accent); color: white; padding: 6rem 3rem; }
+  .features-inner { max-width: 1100px; margin: 0 auto; }
+  .features-section .section-eyebrow { color: rgba(255,255,255,0.5); }
+  .features-section .section-title { color: white; }
+  .features-section .section-title em { color: var(--accent2); }
+  .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
+  .feature-card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px; padding: 1.5rem;
+    transition: background 0.2s;
+  }
+  .feature-card:hover { background: rgba(255,255,255,0.1); }
+  .feature-icon { font-size: 24px; margin-bottom: 1rem; }
+  .feature-title { font-size: 14px; font-weight: 500; margin-bottom: 6px; color: white; }
+  .feature-desc { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
+  .testimonial {
+    background: var(--white); border-radius: 16px; padding: 1.75rem;
+    border: 1px solid var(--border);
+    transition: transform 0.2s;
+  }
+  .testimonial:hover { transform: translateY(-3px); }
+  .stars { color: var(--accent2); font-size: 14px; margin-bottom: 1rem; letter-spacing: 2px; }
+  .testimonial-text { font-size: 14px; font-weight: 300; color: var(--ink); line-height: 1.7; margin-bottom: 1.25rem; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 10px; }
+  .author-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--accent); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 500; flex-shrink: 0;
+  }
+  .author-name { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .author-role { font-size: 11px; color: var(--muted); }
+
+  /* ── PRICING ── */
+  .pricing-section { background: var(--white); }
+  .pricing-card {
+    max-width: 480px; margin: 3.5rem auto 0;
+    background: var(--cream); border: 2px solid var(--accent);
+    border-radius: 20px; padding: 3rem; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .pricing-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .pricing-best {
+    display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent2); background: rgba(200,146,58,0.12);
+    padding: 4px 14px; border-radius: 20px; margin-bottom: 1.5rem;
+  }
+  .pricing-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px; font-weight: 500; color: var(--ink); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .pricing-price sup { font-size: 28px; vertical-align: super; }
+  .pricing-desc { font-size: 14px; color: var(--muted); margin-bottom: 2rem; }
+  .pricing-features { list-style: none; text-align: left; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 12px; }
+  .pricing-features li { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--ink); }
+  .pricing-features li::before {
+    content: '✓'; width: 20px; height: 20px; background: #EAF3DE; color: #3B6D11;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; flex-shrink: 0;
+  }
+  .pricing-cta {
+    display: block; width: 100%; padding: 16px;
+    background: var(--accent); color: white; border: none; border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500;
+    cursor: pointer; text-decoration: none; text-align: center;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(26,58,92,0.25);
+  }
+  .pricing-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(26,58,92,0.35); }
+  .pricing-note { font-size: 12px; color: var(--muted); margin-top: 12px; }
+
+  /* ── FAQ ── */
+  .faq-list { margin-top: 3rem; max-width: 680px; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 0; cursor: pointer; font-size: 15px; font-weight: 500;
+    color: var(--ink); gap: 1rem;
+    background: none; border: none; width: 100%; text-align: left;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .faq-q:hover { color: var(--accent); }
+  .faq-icon { font-size: 20px; color: var(--muted); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-a { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.7; padding-bottom: 1.25rem; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    background: var(--ink); color: white;
+    text-align: center; padding: 7rem 3rem;
+  }
+  .final-cta .section-eyebrow { color: var(--accent2); }
+  .final-cta .section-title { color: white; max-width: 600px; margin: 0 auto 1.5rem; }
+  .final-cta .section-title em { color: var(--accent2); }
+  .final-cta-sub { font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.55); margin-bottom: 2.5rem; }
+  .final-cta .btn-primary { background: var(--accent2); box-shadow: 0 4px 24px rgba(200,146,58,0.4); }
+  .final-cta .btn-primary:hover { box-shadow: 0 8px 36px rgba(200,146,58,0.5); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 15px; color: rgba(255,255,255,0.4); }
+  .footer-logo span { color: rgba(255,255,255,0.6); }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 100px; text-align: center; }
+    .hero-right { display: none; }
+    .hero-trust { justify-content: center; }
+    .hero-actions { justify-content: center; }
+    .steps-grid, .features-grid, .testimonials-grid { grid-template-columns: 1fr; }
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .section { padding: 4rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+    </div>
+    Ventura <span>AI</span>
+  </a>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#features">What you get</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a class="nav-cta" href="ventura-ai.html">Get my plan →</a>
+</nav>
+
+<!-- HERO -->
+<section style="background: var(--cream);">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">AI-Powered · Instant · Professional</div>
+      <h1 class="hero-h1">
+        Your business plan,
+        <span class="line2"><em>written in seconds.</em></span>
+      </h1>
+      <p class="hero-sub">Stop spending weeks writing a business plan nobody will read. Ventura AI generates a complete, investor-ready PDF in under 30 seconds — for €29.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="ventura-ai.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Generate my plan — €29
+        </a>
+        <a class="btn-secondary" href="#how">See how it works ↓</a>
+      </div>
+      <div style="margin-top: -0.5rem; margin-bottom: 1rem; animation: fadeUp 0.6s 0.35s ease both;">
+        <a href="golden-crust-sample-plan.pdf" download style="font-size:13px; color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px dashed var(--border); padding-bottom: 2px; transition: color 0.2s;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+          Not sure what you'll get? Download a sample plan →
+        </a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Secure payment
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 12l-4-4m4 4l4-4"/></svg>
+          Instant PDF download
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          Under 30 seconds
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div style="position: relative; padding: 20px 24px 40px 0;">
+        <div class="doc-card">
+          <div class="doc-header">
+            <div class="doc-header-label">Business Plan · Confidential</div>
+            <div class="doc-header-title">Golden Crust Bakery</div>
+            <div class="doc-header-sub">Generated by Ventura AI · May 2026</div>
+          </div>
+          <div class="doc-body">
+            <div class="doc-section">
+              <div class="doc-section-title">Executive Summary</div>
+              <div class="doc-line long accent"></div>
+              <div class="doc-line med"></div>
+              <div class="doc-line short"></div>
+            </div>
+            <div class="doc-section">
+              <div class="doc-section-title">Market Opportunity</div>
+              <div class="doc-line med accent"></div>
+              <div class="doc-line long"></div>
+              <div class="doc-line short"></div>
+            </div>
+            <div class="doc-section">
+              <div class="doc-section-title">Financial Projections</div>
+              <div class="doc-line long accent"></div>
+              <div class="doc-line med"></div>
+            </div>
+          </div>
+        </div>
+        <div class="doc-badge">
+          <div class="doc-badge-price">€29</div>
+          <div class="doc-badge-label">one-time</div>
+        </div>
+        <div class="doc-float">
+          <div class="doc-float-icon">✅</div>
+          <div>
+            <div class="doc-float-text">Plan generated!</div>
+            <div class="doc-float-sub">Ready to download as PDF</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<div class="logos-bar">
+  <div class="logos-label">Trusted by small business owners in</div>
+  <div class="logos-row">
+    <div class="logo-pill">🇩🇪 Germany</div>
+    <div class="logo-pill">🇵🇹 Portugal</div>
+    <div class="logo-pill">🇪🇸 Spain</div>
+    <div class="logo-pill">🇳🇱 Netherlands</div>
+    <div class="logo-pill">🇦🇹 Austria</div>
+    <div class="logo-pill">🇫🇷 France</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <div class="reveal">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title">Three steps to your <em>perfect plan</em></h2>
+    <p class="section-sub">No consultants, no templates to fill in for hours. Just describe your business and let AI do the rest.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card reveal">
+      <div class="step-num">1</div>
+      <div class="step-icon">✍️</div>
+      <div class="step-title">Describe your business</div>
+      <div class="step-desc">Fill in a simple form — your business name, what you do, your industry, and your goals. Takes under 2 minutes.</div>
+    </div>
+    <div class="step-card reveal" style="transition-delay:0.1s">
+      <div class="step-num">2</div>
+      <div class="step-icon">⚡</div>
+      <div class="step-title">AI writes your plan</div>
+      <div class="step-desc">Our AI generates a complete 11-section business plan with financial projections, market analysis, and strategy. Done in seconds.</div>
+    </div>
+    <div class="step-card reveal" style="transition-delay:0.2s">
+      <div class="step-num">3</div>
+      <div class="step-icon">📄</div>
+      <div class="step-title">Download your PDF</div>
+      <div class="step-desc">Get a branded, professional PDF ready to present to banks, investors, or partners. Looks like it took weeks to produce.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="features-section" id="features">
+  <div class="features-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">What you get</div>
+      <h2 class="section-title">Everything a bank or investor <em>actually wants</em></h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">📋</div>
+        <div class="feature-title">Executive Summary</div>
+        <div class="feature-desc">A compelling overview that hooks any reader in the first 30 seconds.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:0.05s">
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">Market Analysis</div>
+        <div class="feature-desc">TAM/SAM/SOM breakdown, trends, and competitive landscape.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:0.1s">
+        <div class="feature-icon">💰</div>
+        <div class="feature-title">Financial Projections</div>
+        <div class="feature-desc">3-year revenue forecast, cost breakdown, and profitability timeline.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:0.15s">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">Marketing Strategy</div>
+        <div class="feature-desc">A concrete go-to-market plan with channels, tactics, and first 100 customers.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:0.2s">
+        <div class="feature-icon">⚙️</div>
+        <div class="feature-title">Operations Plan</div>
+        <div class="feature-desc">Team structure, suppliers, technology, and day-to-day processes.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:0.25s">
+        <div class="feature-icon">🗺️</div>
+        <div class="feature-title">12-Month Roadmap</div>
+        <div class="feature-desc">Quarter-by-quarter milestones so you always know what comes next.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:0.3s">
+        <div class="feature-icon">⚠️</div>
+        <div class="feature-title">Risk Analysis</div>
+        <div class="feature-desc">Top 5 business risks with concrete mitigation strategies for each.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:0.35s">
+        <div class="feature-icon">📥</div>
+        <div class="feature-title">Branded PDF</div>
+        <div class="feature-desc">A polished, multi-page document with cover page, headers, and page numbers.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+  <div class="reveal">
+    <div class="section-eyebrow">What people are saying</div>
+    <h2 class="section-title">Real results from <em>real owners</em></h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"I needed a business plan for a bank loan and had no idea where to start. Ventura AI gave me something professional in literally 30 seconds. The bank approved my application."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">MR</div>
+        <div>
+          <div class="author-name">Maria R.</div>
+          <div class="author-role">Bakery owner, Lisbon</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial reveal" style="transition-delay:0.1s">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"I was quoted €800 by a consultant. Ventura AI did the same job for €29. The plan was detailed, realistic, and my investor was genuinely impressed."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">TK</div>
+        <div>
+          <div class="author-name">Thomas K.</div>
+          <div class="author-role">Startup founder, Berlin</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial reveal" style="transition-delay:0.2s">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Perfect for someone who knows their business but has no idea how to write a plan. It asked me the right questions and produced something I was proud to share."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SC</div>
+        <div>
+          <div class="author-name">Sofia C.</div>
+          <div class="author-role">Freelance designer, Barcelona</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section pricing-section" id="pricing">
+  <div class="reveal" style="text-align:center">
+    <div class="section-eyebrow">Simple pricing</div>
+    <h2 class="section-title">One plan. One price. <em>No surprises.</em></h2>
+  </div>
+  <div class="pricing-card reveal">
+    <div class="pricing-best">Most popular</div>
+    <div class="pricing-price"><sup>€</sup>29</div>
+    <div class="pricing-desc">One-time payment · Instant delivery · No subscription</div>
+    <ul class="pricing-features">
+      <li>Complete 11-section business plan</li>
+      <li>3-year financial projections</li>
+      <li>Market analysis & competitive landscape</li>
+      <li>Branded PDF with cover page</li>
+      <li>Ready for banks & investors</li>
+      <li>Generated in under 30 seconds</li>
+    </ul>
+    <a class="pricing-cta" href="ventura-ai.html">Generate my business plan →</a>
+    <div class="pricing-note">🔒 Secured by Stripe · Instant access after payment</div>
+    <div style="margin-top: 14px; text-align: center;">
+      <a href="golden-crust-sample-plan.pdf" download style="font-size: 12px; color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: color 0.2s;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+        See a sample plan before you buy →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="reveal">
+    <div class="section-eyebrow">FAQ</div>
+    <h2 class="section-title">Questions? <em>Answered.</em></h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Is this good enough for a real bank or investor?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Yes. The plan includes all sections a bank or investor expects — executive summary, market analysis, financial projections, risk analysis, and a 12-month roadmap. It's written in a professional tone designed for formal submission.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        How is this different from a free template?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Templates give you blank boxes to fill in. Ventura AI writes the actual content based on your specific business — the market analysis, the strategy, the projections. You get a finished document, not a starting point.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Can I edit the plan after it's generated?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Absolutely. You can copy the text from the app and paste it into Word or Google Docs to edit, add your logo, or adjust any numbers. The PDF is a starting point — most users tweak 10–20% of the content.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What if I'm not happy with the result?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">You can generate again with more detailed inputs and get a better result. The more specific you are about your business, the more tailored and impressive the output will be.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Is my payment secure?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Payments are processed entirely by Stripe, one of the world's most trusted payment platforms. We never see or store your card details.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="section-eyebrow">Get started today</div>
+  <h2 class="section-title">Stop procrastinating. <em>Start building.</em></h2>
+  <p class="final-cta-sub">Your business plan is 30 seconds away. For less than the price of dinner.</p>
+  <a class="btn-primary" href="ventura-ai.html">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    Generate my plan — €29
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Ventura <span>AI</span></div>
+  <div class="footer-copy">© 2026 Ventura AI · Professional business plans powered by AI</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+
+  // FAQ toggle
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+</body>
+</html>
