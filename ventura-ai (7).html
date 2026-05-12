@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ventura AI — Business Plan Generator</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  :root {
+    --black: #0f0f0f; --white: #ffffff; --gray-50: #f9f9f8;
+    --gray-100: #f0efec; --gray-200: #e2e1dc; --gray-400: #a09e97;
+    --gray-600: #6b6961; --gray-800: #2c2b28;
+    --accent: #1a3a5c; --accent-light: #e8eff7;
+    --gold: #c8923a; --gold-light: #fdf3e7;
+    --radius: 10px; --radius-lg: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: var(--gray-50); color: var(--black); min-height: 100vh; }
+  nav { background: var(--white); border-bottom: 1px solid var(--gray-200); padding: 0 2rem; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-mark { width: 30px; height: 30px; background: var(--accent); border-radius: 7px; display: flex; align-items: center; justify-content: center; }
+  .nav-logo-mark svg { width: 16px; height: 16px; fill: white; }
+  .nav-brand { font-size: 15px; font-weight: 600; color: var(--black); font-family: Georgia, serif; }
+  .nav-brand span { color: var(--accent); }
+
+  .plan-selector { max-width: 820px; margin: 2rem auto 0; padding: 0 1.5rem; }
+  .plan-selector h2 { font-size: 11px; font-family: Arial, sans-serif; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+  .plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
+  .plan-card { border-radius: var(--radius-lg); padding: 1.5rem; cursor: pointer; border: 2px solid var(--gray-200); background: var(--white); transition: all 0.15s; position: relative; }
+  .plan-card.selected { border-color: var(--accent); background: var(--accent-light); }
+  .plan-card.premium-card { border-color: var(--gold); background: var(--gold-light); }
+  .plan-card.premium-card.selected { box-shadow: 0 0 0 2px var(--gold); }
+  .plan-badge { font-size: 10px; font-weight: 600; font-family: Arial, sans-serif; padding: 3px 10px; border-radius: 20px; display: inline-block; margin-bottom: 10px; }
+  .badge-std { background: var(--accent-light); color: var(--accent); }
+  .badge-pro { background: var(--gold-light); color: var(--gold); border: 1px solid var(--gold); }
+  .plan-name { font-size: 17px; font-weight: 500; color: var(--black); margin-bottom: 4px; }
+  .plan-price { font-size: 26px; font-weight: 600; font-family: Arial, sans-serif; color: var(--black); margin-bottom: 10px; }
+  .plan-price span { font-size: 13px; font-weight: 400; color: var(--gray-400); }
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .plan-features li { font-size: 12px; font-family: Arial, sans-serif; color: var(--gray-600); display: flex; align-items: center; gap: 7px; }
+  .plan-features li::before { content: '✓'; font-size: 10px; font-weight: 700; color: var(--accent); }
+  .premium-card .plan-features li::before { color: var(--gold); }
+  .plan-radio { position: absolute; top: 14px; right: 14px; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--gray-200); display: flex; align-items: center; justify-content: center; font-size: 10px; color: white; }
+  .plan-card.selected .plan-radio { background: var(--accent); border-color: var(--accent); }
+  .plan-card.selected .plan-radio::after { content: '✓'; }
+  .premium-card.selected .plan-radio { background: var(--gold); border-color: var(--gold); }
+
+  .container { max-width: 820px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+  .card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 1.75rem; margin-bottom: 1rem; }
+  .card-title { font-size: 11px; font-family: Arial, sans-serif; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 1.25rem; }
+  .field { margin-bottom: 1.1rem; }
+  .field:last-child { margin-bottom: 0; }
+  .field label { display: block; font-size: 13px; font-family: Arial, sans-serif; font-weight: 600; color: var(--gray-800); margin-bottom: 5px; }
+  .opt { font-weight: 400; color: var(--gray-400); font-size: 11px; margin-left: 4px; }
+  .field input, .field textarea, .field select { width: 100%; padding: 10px 13px; font-size: 14px; font-family: Arial, sans-serif; color: var(--black); background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); outline: none; transition: border-color 0.15s; resize: vertical; appearance: none; }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--accent); background: var(--white); }
+  .field textarea { min-height: 80px; line-height: 1.6; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .chip { font-size: 12px; font-family: Arial, sans-serif; padding: 5px 12px; border-radius: 20px; cursor: pointer; border: 1px solid var(--gray-200); color: var(--gray-600); background: transparent; transition: all 0.15s; }
+  .chip.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+  /* CHAT */
+  .chat-box { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1rem; }
+  .chat-intro { font-size: 13px; font-family: Arial, sans-serif; color: var(--gray-600); margin-bottom: 1rem; line-height: 1.6; padding: 10px 14px; background: var(--gold-light); border-radius: var(--radius); border-left: 3px solid var(--gold); }
+  .chat-messages { min-height: 260px; max-height: 420px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; margin-bottom: 1rem; }
+  .msg { display: flex; gap: 10px; align-items: flex-start; }
+  .msg.user { flex-direction: row-reverse; }
+  .msg-av { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; font-family: Arial, sans-serif; flex-shrink: 0; }
+  .msg.ai .msg-av { background: var(--accent); color: white; }
+  .msg.user .msg-av { background: var(--gold); color: white; }
+  .msg-text { max-width: 78%; padding: 10px 14px; border-radius: 12px; font-size: 13px; font-family: Arial, sans-serif; line-height: 1.6; }
+  .msg.ai .msg-text { background: var(--gray-100); color: var(--black); border-bottom-left-radius: 4px; }
+  .msg.user .msg-text { background: var(--accent); color: white; border-bottom-right-radius: 4px; }
+  .chat-input-row { display: flex; gap: 8px; }
+  .chat-inp { flex: 1; padding: 11px 14px; font-size: 14px; font-family: Arial, sans-serif; color: var(--black); background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); outline: none; }
+  .chat-inp:focus { border-color: var(--gold); background: var(--white); }
+  .chat-btn { padding: 11px 18px; background: var(--gold); color: white; border: none; border-radius: var(--radius); font-size: 14px; font-family: Arial, sans-serif; font-weight: 500; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; }
+  .chat-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .chat-progress { font-size: 11px; font-family: Arial, sans-serif; color: var(--gray-400); text-align: center; margin-top: 8px; }
+
+  .gen-btn { width: 100%; padding: 14px; color: white; border: none; border-radius: var(--radius); font-size: 15px; font-family: Arial, sans-serif; font-weight: 600; cursor: pointer; transition: opacity 0.15s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .gen-btn:hover { opacity: 0.88; }
+  .gen-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .gen-btn.blue { background: var(--accent); }
+  .gen-btn.gold-btn { background: var(--gold); display: none; }
+  .gen-btn.gold-btn.show { display: flex; }
+
+  /* MODAL */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 1000; align-items: center; justify-content: center; padding: 1.5rem; }
+  .overlay.on { display: flex; }
+  .modal { background: var(--white); border-radius: var(--radius-lg); padding: 2rem; max-width: 400px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.15); animation: up 0.2s ease; }
+  @keyframes up { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+  .modal-brand { display: flex; align-items: center; gap: 8px; margin-bottom: 1.25rem; font-size: 14px; font-weight: 600; font-family: Georgia, serif; color: var(--black); }
+  .modal-brand-dot { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+  .modal-brand-dot svg { width: 13px; height: 13px; fill: white; }
+  .modal h2 { font-size: 19px; font-weight: 400; font-family: Georgia, serif; margin-bottom: 6px; }
+  .modal-sub { font-size: 13px; color: var(--gray-600); font-family: Arial, sans-serif; line-height: 1.6; margin-bottom: 1.25rem; }
+  .modal-feats { list-style: none; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 7px; }
+  .modal-feats li { font-size: 13px; font-family: Arial, sans-serif; color: var(--gray-800); display: flex; align-items: center; gap: 8px; }
+  .modal-feats li::before { content: '✓'; width: 17px; height: 17px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; flex-shrink: 0; }
+  .modal-feats.std li::before { background: #EAF3DE; color: #3B6D11; }
+  .modal-feats.pro li::before { background: var(--gold-light); color: var(--gold); }
+  .modal-pricebox { display: flex; align-items: baseline; gap: 6px; padding: 12px 14px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); margin-bottom: 1.25rem; }
+  .modal-amount { font-size: 30px; font-weight: 500; font-family: Georgia, serif; }
+  .modal-pdesc { font-size: 13px; color: var(--gray-600); font-family: Arial, sans-serif; }
+  .modal-pnote { font-size: 11px; color: var(--gray-400); font-family: Arial, sans-serif; margin-left: auto; }
+  .pay-btn { width: 100%; padding: 13px; border: none; border-radius: var(--radius); font-size: 15px; font-family: Arial, sans-serif; font-weight: 600; cursor: pointer; color: white; margin-bottom: 8px; transition: opacity 0.15s; }
+  .pay-btn:hover { opacity: 0.88; }
+  .pay-btn.blue { background: var(--accent); }
+  .pay-btn.gold-btn { background: var(--gold); }
+  .modal-cancel { width: 100%; padding: 8px; background: none; border: none; font-size: 13px; font-family: Arial, sans-serif; color: var(--gray-400); cursor: pointer; }
+  .modal-lock { text-align: center; font-size: 11px; font-family: Arial, sans-serif; color: var(--gray-400); margin-top: 6px; }
+
+  .success-bar { display: none; background: #EAF3DE; border: 1px solid #c3e6a0; border-radius: var(--radius); padding: 11px 15px; margin-bottom: 1rem; font-size: 13px; font-family: Arial, sans-serif; color: #3B6D11; align-items: center; gap: 8px; }
+  .success-bar.on { display: flex; }
+
+  .out-wrap { display: none; margin-top: 1.25rem; }
+  .out-wrap.on { display: block; }
+  .out-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); overflow: hidden; }
+  .out-bar { padding: 12px 18px; border-bottom: 1px solid var(--gray-100); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .out-bar-left { display: flex; align-items: center; gap: 10px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
+  .dot.spin { background: var(--gray-400); animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.2} }
+  .out-name { font-size: 13px; font-weight: 600; font-family: Arial, sans-serif; }
+  .out-sub { font-size: 11px; color: var(--gray-400); font-family: Arial, sans-serif; }
+  .out-actions { display: flex; gap: 8px; }
+  .btn-s { font-size: 12px; font-family: Arial, sans-serif; font-weight: 600; padding: 6px 12px; border-radius: 7px; cursor: pointer; border: 1px solid var(--gray-200); background: white; color: var(--gray-600); display: flex; align-items: center; gap: 5px; }
+  .btn-s.pri { background: var(--accent); color: white; border-color: var(--accent); }
+  .btn-s:disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+  .out-body { padding: 1.75rem 2rem; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.85; max-height: 620px; overflow-y: auto; }
+  .out-body h2 { font-family: Georgia, serif; font-size: 16px; font-weight: 400; color: var(--accent); margin: 1.5rem 0 0.5rem; padding-bottom: 6px; border-bottom: 1px solid var(--gray-100); }
+  .out-body h2:first-child { margin-top: 0; }
+  .out-body p { color: var(--gray-800); margin-bottom: 0.75rem; }
+  .out-body ul { padding-left: 1.4rem; color: var(--gray-800); margin-bottom: 0.75rem; }
+  .out-body li { margin-bottom: 5px; }
+  .out-body strong { color: var(--black); font-weight: 600; }
+  .skel-wrap { padding: 1.75rem 2rem; }
+  .skel { background: var(--gray-100); border-radius: 4px; margin-bottom: 10px; animation: sk 1.2s infinite; }
+  @keyframes sk { 0%,100%{opacity:0.5}50%{opacity:1} }
+  .err { padding: 1.25rem 2rem; font-size: 13px; font-family: Arial, sans-serif; color: #c0392b; }
+  .footer { text-align: center; margin-top: 2rem; font-size: 11px; font-family: Arial, sans-serif; color: var(--gray-400); }
+
+  @media(max-width:600px){.plans-grid,.row2,.row3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-mark"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+    <span class="nav-brand">Ventura <span>AI</span></span>
+  </a>
+</nav>
+
+<div class="plan-selector">
+  <h2>Choose your plan</h2>
+  <div class="plans-grid">
+    <div class="plan-card selected" id="pc-std" onclick="setPlan('standard')">
+      <div class="plan-radio"></div>
+      <div class="plan-badge badge-std">Standard</div>
+      <div class="plan-name">Business Plan</div>
+      <div class="plan-price">€29 <span>one-time</span></div>
+      <ul class="plan-features">
+        <li>Detailed form with your real data</li>
+        <li>11-section professional plan</li>
+        <li>3-year financial projections</li>
+        <li>Branded PDF download</li>
+        <li>Ready for banks &amp; investors</li>
+      </ul>
+    </div>
+    <div class="plan-card premium-card" id="pc-pro" onclick="setPlan('premium')">
+      <div class="plan-radio"></div>
+      <div class="plan-badge badge-pro">⭐ Premium</div>
+      <div class="plan-name">AI Consultant</div>
+      <div class="plan-price">€49 <span>one-time</span></div>
+      <ul class="plan-features">
+        <li>1-on-1 AI consultant interview</li>
+        <li>AI asks the right questions</li>
+        <li>Deeper, personalised plan</li>
+        <li>11-section professional plan</li>
+        <li>Branded PDF download</li>
+        <li>Priority quality output</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="success-bar" id="sbar">✅ Payment confirmed — generating your plan now!</div>
+
+  <!-- MODAL -->
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <div class="modal-brand">
+        <div class="modal-brand-dot" id="mdot" style="background:var(--accent)"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+        Ventura AI
+      </div>
+      <h2 id="m-title">Get your business plan</h2>
+      <p class="modal-sub" id="m-sub">One payment. Instant delivery.</p>
+      <ul class="modal-feats std" id="m-feats">
+        <li>Complete 11-section plan</li>
+        <li>3-year financial projections</li>
+        <li>Branded PDF download</li>
+        <li>Ready for banks &amp; investors</li>
+      </ul>
+      <div class="modal-pricebox">
+        <div class="modal-amount" id="m-price">€29</div>
+        <div class="modal-pdesc">one-time</div>
+        <div class="modal-pnote">No subscription</div>
+      </div>
+      <button class="pay-btn blue" id="m-paybtn" onclick="goStripe()">🔒 Pay securely with Stripe</button>
+      <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+      <div class="modal-lock">SSL encrypted · No card data stored</div>
+    </div>
+  </div>
+
+  <!-- STANDARD FORM -->
+  <div id="std-form">
+    <div class="card">
+      <div class="card-title">About your business</div>
+      <div class="field"><label>Business name</label><input id="f-name" placeholder="e.g. FreshBake Bakery" /></div>
+      <div class="field"><label>What does your business do?</label><textarea id="f-desc" placeholder="Describe what you sell, how you deliver it, and what makes you different from competitors..."></textarea></div>
+      <div class="row2">
+        <div class="field"><label>Industry</label>
+          <select id="f-industry"><option value="">Select...</option><option>Food &amp; Beverage</option><option>Retail</option><option>Health &amp; Wellness</option><option>Technology</option><option>Professional Services</option><option>Education</option><option>Construction &amp; Trades</option><option>Beauty &amp; Personal Care</option><option>E-commerce</option><option>Import / Export</option><option>Manufacturing</option><option>Other</option></select>
+        </div>
+        <div class="field"><label>Business stage</label>
+          <select id="f-stage"><option value="">Select...</option><option>Idea / Pre-launch</option><option>Just launched (0–1 year)</option><option>Early stage (1–3 years)</option><option>Established (3+ years)</option></select>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Country / City</label><input id="f-location" placeholder="e.g. Lisbon, Portugal" /></div>
+        <div class="field"><label>Legal structure <span class="opt">(optional)</span></label>
+          <select id="f-legal"><option value="">Select...</option><option>Sole trader / Self-employed</option><option>Limited company</option><option>Partnership</option><option>Not decided</option></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Customers &amp; Market</div>
+      <div class="field"><label>Who are your target customers?</label><textarea id="f-customers" placeholder="Age, location, income level, problem they have, why they'd buy from you..."></textarea></div>
+      <div class="field"><label>Main competitors <span class="opt">(optional)</span></label><input id="f-competitors" placeholder="e.g. Local bakeries, supermarket brands, Panera Bread" /></div>
+      <div class="field"><label>What makes you different?</label><input id="f-diff" placeholder="e.g. Only sourdough specialist in the area, cheaper pricing, home delivery" /></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Products, Pricing &amp; Financials</div>
+      <div class="field"><label>List your products or services with prices</label><textarea id="f-products" placeholder="e.g. Sourdough loaf — €8, Pastry box — €14, Weekly subscription — €30/mo, Custom cakes — from €45..."></textarea></div>
+      <div class="row3">
+        <div class="field"><label>Startup budget <span class="opt">(optional)</span></label><input id="f-budget" placeholder="e.g. €20,000" /></div>
+        <div class="field"><label>Current monthly revenue <span class="opt">(optional)</span></label><input id="f-revenue" placeholder="e.g. €0 or €3,500/mo" /></div>
+        <div class="field"><label>Team size</label><input id="f-team" placeholder="e.g. Just me, or 3 people" /></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Goals &amp; Strategy</div>
+      <div class="field"><label>Year 1 revenue target</label><input id="f-target" placeholder="e.g. €80,000 in first year" /></div>
+      <div class="field"><label>Why are you creating this plan?</label>
+        <select id="f-reason"><option value="">Select...</option><option>Bank loan application</option><option>Investor pitch</option><option>Personal roadmap</option><option>Grant application</option><option>Other</option></select>
+      </div>
+      <div class="field"><label>Main goals</label>
+        <div class="chips">
+          <button class="chip" data-val="Secure funding">Secure funding</button>
+          <button class="chip" data-val="Open a location">Open a location</button>
+          <button class="chip" data-val="Grow online sales">Grow online sales</button>
+          <button class="chip" data-val="Hire a team">Hire a team</button>
+          <button class="chip" data-val="Launch a product">Launch a product</button>
+          <button class="chip" data-val="Expand to new markets">Expand markets</button>
+        </div>
+      </div>
+      <div class="field"><label>Anything else to include? <span class="opt">(optional)</span></label><textarea id="f-extra" placeholder="Any specific details, numbers, partnerships or context you want in your plan..." style="min-height:60px"></textarea></div>
+    </div>
+
+    <button class="gen-btn blue" id="btn-std" onclick="handleGen('standard')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      Generate my business plan — €29
+    </button>
+  </div>
+
+  <!-- PREMIUM CHAT -->
+  <div id="pro-form" style="display:none">
+    <div class="chat-box">
+      <div class="chat-intro">💼 Your AI consultant will interview you — just like a real business consultant. Answer each question fully. The more detail you give, the more accurate and personalised your plan will be.</div>
+      <div class="chat-messages" id="chat-msgs">
+        <div class="msg ai"><div class="msg-av">V</div><div class="msg-text">Hello! I'm your Ventura AI business consultant. I'll ask you a few questions to build your personalised business plan. Let's start — what's the name of your business, and what does it do?</div></div>
+      </div>
+      <div class="chat-input-row">
+        <input class="chat-inp" id="chat-inp" placeholder="Type your answer..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}" />
+        <button class="chat-btn" id="chat-send" onclick="sendMsg()">Send →</button>
+      </div>
+      <div class="chat-progress" id="chat-prog">Question 1 of 8</div>
+    </div>
+    <button class="gen-btn gold-btn" id="btn-pro" onclick="handleGen('premium')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      Generate my premium plan — €49
+    </button>
+  </div>
+
+  <!-- OUTPUT -->
+  <div class="out-wrap" id="out-wrap">
+    <div class="out-card">
+      <div class="out-bar">
+        <div class="out-bar-left">
+          <div class="dot" id="dot"></div>
+          <div><div class="out-name" id="out-name">Business Plan</div><div class="out-sub">Generated by Ventura AI</div></div>
+        </div>
+        <div class="out-actions">
+          <button class="btn-s" id="copy-btn" onclick="doCopy()" disabled>Copy</button>
+          <button class="btn-s pri" id="pdf-btn" onclick="doPDF()" disabled>⬇ Download PDF</button>
+        </div>
+      </div>
+      <div class="out-body" id="out-body"></div>
+    </div>
+  </div>
+
+  <div class="footer">Powered by Ventura AI · Professional business plans for small business owners</div>
+</div>
+
+<script>
+const WORKER = 'https://misty-scene-c720.sl7236312.workers.dev';
+const STRIPE_STD = 'https://buy.stripe.com/test_fZu9ATbHN2jqfMAgphgrS00';
+const STRIPE_PRO = 'https://buy.stripe.com/test_fZu9ATbHN2jqfMAgphgrS00'; // Replace with €49 link when ready
+
+let plan = 'standard', genText = '', bizName = '';
+let chatHist = [], chatStep = 0;
+
+function sv(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function ld(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function cl(k){try{localStorage.removeItem(k)}catch(e){}}
+
+function setPlan(p) {
+  plan = p;
+  document.getElementById('pc-std').className = 'plan-card' + (p==='standard'?' selected':'');
+  document.getElementById('pc-pro').className = 'plan-card premium-card' + (p==='premium'?' selected':'');
+  document.getElementById('std-form').style.display = p==='standard'?'block':'none';
+  document.getElementById('pro-form').style.display = p==='premium'?'block':'none';
+}
+
+document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('active')));
+function goals(){return[...document.querySelectorAll('.chip.active')].map(c=>c.dataset.val).join(', ');}
+
+function g(id){const el=document.getElementById(id);return el?el.value.trim():'';}
+
+function openModal(p) {
+  const pro = p==='premium';
+  document.getElementById('mdot').style.background = pro?'var(--gold)':'var(--accent)';
+  document.getElementById('m-title').textContent = pro?'Get your AI Consultant plan':'Get your business plan';
+  document.getElementById('m-sub').textContent = pro?'Your AI consultant has what it needs to build your plan.':'One payment. Instant delivery. Professional PDF.';
+  document.getElementById('m-price').textContent = pro?'€49':'€29';
+  document.getElementById('m-paybtn').className = `pay-btn ${pro?'gold-btn':'blue'}`;
+  document.getElementById('m-paybtn').textContent = `🔒 Pay ${pro?'€49':'€29'} securely with Stripe`;
+  const fl = document.getElementById('m-feats');
+  fl.className = `modal-feats ${pro?'pro':'std'}`;
+  fl.innerHTML = pro
+    ? '<li>AI consultant interview</li><li>Deeper personalised plan</li><li>11-section business plan</li><li>Branded PDF download</li>'
+    : '<li>11-section business plan</li><li>3-year financial projections</li><li>Branded PDF download</li><li>Ready for banks &amp; investors</li>';
+  document.getElementById('overlay').classList.add('on');
+}
+function closeModal(){document.getElementById('overlay').classList.remove('on');}
+document.getElementById('overlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+function goStripe(){
+  const p = ld('ventura_plan')||plan;
+  window.location.href = p==='premium'?STRIPE_PRO:STRIPE_STD;
+}
+
+// CHAT
+async function sendMsg() {
+  const inp = document.getElementById('chat-inp');
+  const txt = inp.value.trim(); if(!txt) return;
+  inp.value=''; document.getElementById('chat-send').disabled=true;
+  addBubble('user', txt);
+  chatHist.push({role:'user',content:txt});
+  chatStep++;
+  updProg();
+  if(chatStep>=8){
+    const done="Perfect! I have everything I need. Click the button below to generate your personalised business plan.";
+    addBubble('ai',done);
+    chatHist.push({role:'assistant',content:done});
+    document.getElementById('btn-pro').classList.add('show');
+    return;
+  }
+  try {
+    const sys = `You are a friendly business consultant interviewing a client to build their business plan. Ask ONE short follow-up question based on their answers. Topics to cover across 8 questions: business name/description, location/market, products/prices, customers/pain points, competitors/advantages, team/budget, revenue targets, purpose of plan. Keep questions concise.`;
+    const msgs = [{role:'user',content:sys},...chatHist];
+    const r = await fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-haiku-4-5',max_tokens:150,messages:msgs})});
+    const d = await r.json();
+    const reply = d.content?.map(b=>b.text||'').join('')||'Tell me more about that.';
+    addBubble('ai',reply);
+    chatHist.push({role:'assistant',content:reply});
+  } catch(e){addBubble('ai','Could you elaborate on that?');}
+  document.getElementById('chat-send').disabled=false;
+  document.getElementById('chat-inp').focus();
+}
+
+function addBubble(role,txt) {
+  const c=document.getElementById('chat-msgs');
+  const d=document.createElement('div');
+  d.className=`msg ${role}`;
+  d.innerHTML=`<div class="msg-av">${role==='ai'?'V':'You'}</div><div class="msg-text">${txt}</div>`;
+  c.appendChild(d); c.scrollTop=c.scrollHeight;
+}
+
+function updProg(){
+  const q=Math.min(chatStep+1,8);
+  document.getElementById('chat-prog').textContent = chatStep>=8?'Interview complete ✓':`Question ${q} of 8`;
+}
+
+// HANDLE GENERATE
+function handleGen(p) {
+  const paid = ld('ventura_paid')==='true';
+  if(!paid){
+    if(p==='standard'){
+      if(!g('f-name')||!g('f-desc')){alert('Please fill in your business name and description.');return;}
+      sv('ventura_form',JSON.stringify({
+        name:g('f-name'),desc:g('f-desc'),industry:g('f-industry'),stage:g('f-stage'),
+        location:g('f-location'),legal:g('f-legal'),customers:g('f-customers'),
+        competitors:g('f-competitors'),diff:g('f-diff'),products:g('f-products'),
+        budget:g('f-budget'),revenue:g('f-revenue'),team:g('f-team'),
+        target:g('f-target'),reason:g('f-reason'),goals:goals(),extra:g('f-extra')
+      }));
+    } else {
+      if(chatStep<3){alert('Please answer a few more questions first.');return;}
+      sv('ventura_form',JSON.stringify({chatHist,chatStep}));
+    }
+    sv('ventura_plan',p); openModal(p);
+  } else { doGenerate(p); }
+}
+
+// GENERATE
+async function doGenerate(p, f) {
+  cl('ventura_paid'); cl('ventura_form'); cl('ventura_plan');
+  const btn = document.getElementById(p==='premium'?'btn-pro':'btn-std');
+  if(btn){btn.disabled=true;btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/></svg> Generating...';}
+  document.getElementById('out-wrap').classList.add('on');
+  document.getElementById('dot').className='dot spin';
+  document.getElementById('copy-btn').disabled=true;
+  document.getElementById('pdf-btn').disabled=true;
+  document.getElementById('out-body').innerHTML=`<div class="skel-wrap"><div class="skel" style="height:12px;width:40%"></div><div class="skel" style="height:12px;width:75%"></div><div class="skel" style="height:12px;width:60%"></div><div class="skel" style="height:12px;width:80%"></div><div class="skel" style="height:12px;width:50%"></div></div>`;
+
+  let prompt='';
+  if(p==='premium'){
+    const transcript = chatHist.map(m=>`${m.role==='user'?'Client':'Consultant'}: ${m.content}`).join('\n');
+    bizName='Your Business';
+    const first=chatHist.find(m=>m.role==='user');
+    if(first)bizName=first.content.split(' ').slice(0,4).join(' ');
+    prompt=`You are a senior business plan writer. Based on this consultant interview, write a complete professional business plan using ONLY the real information provided. Do not invent data not mentioned.
+
+INTERVIEW:
+${transcript}
+
+Write with ## headings:
+## Executive Summary
+## Business Description
+## Market Opportunity
+## Target Customers
+## Products & Services
+## Revenue Model
+## Marketing Strategy
+## Operations Plan
+## Financial Projections (use client's stated targets)
+## Key Milestones
+## Risk Analysis
+
+Use only real info from the interview. Where data is missing say "to be confirmed." Professional tone for bank/investor.`;
+  } else {
+    const fd = f||{};
+    const fv = k => (fd[k]||'').trim();
+    bizName = fv('name')||g('f-name')||'Your Business';
+    prompt=`You are a senior business plan writer. Write a complete professional business plan using ONLY the real data below. Never invent numbers or facts not provided.
+
+BUSINESS DATA:
+- Name: ${fv('name')||g('f-name')}
+- Description: ${fv('desc')||g('f-desc')}
+- Industry: ${fv('industry')||g('f-industry')}
+- Stage: ${fv('stage')||g('f-stage')}
+- Location: ${fv('location')||g('f-location')}
+- Legal structure: ${fv('legal')||g('f-legal')}
+- Target customers: ${fv('customers')||g('f-customers')}
+- Competitors: ${fv('competitors')||g('f-competitors')}
+- Competitive advantage: ${fv('diff')||g('f-diff')}
+- Products & prices: ${fv('products')||g('f-products')}
+- Startup budget: ${fv('budget')||g('f-budget')}
+- Current revenue: ${fv('revenue')||g('f-revenue')}
+- Team: ${fv('team')||g('f-team')}
+- Year 1 target: ${fv('target')||g('f-target')}
+- Plan purpose: ${fv('reason')||g('f-reason')}
+- Goals: ${fv('goals')||goals()}
+- Extra info: ${fv('extra')||g('f-extra')}
+
+Write with ## headings:
+## Executive Summary
+## Business Description
+## Market Opportunity
+## Target Customers
+## Products & Services
+## Revenue Model
+## Marketing Strategy
+## Operations Plan
+## Financial Projections (based on client's real targets — 3 years)
+## Key Milestones
+## Risk Analysis
+
+Use only data provided. Where missing say "to be confirmed." Professional tone for bank/investor.`;
+  }
+
+  document.getElementById('out-name').textContent = bizName + ' — Business Plan';
+
+  try {
+    const r=await fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-haiku-4-5',max_tokens:4000,messages:[{role:'user',content:prompt}]})});
+    const d=await r.json();
+    if(d.error)throw new Error(d.error.message);
+    genText=d.content.map(b=>b.text||'').join('');
+    document.getElementById('out-body').innerHTML=renderMD(genText);
+    document.getElementById('dot').className='dot';
+    document.getElementById('copy-btn').disabled=false;
+    document.getElementById('pdf-btn').disabled=false;
+  } catch(err){
+    document.getElementById('out-body').innerHTML=`<div class="err">Error: ${err.message}. Please try again.</div>`;
+    document.getElementById('dot').className='dot';
+  }
+  if(btn){btn.disabled=false;btn.innerHTML=`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Generate again`;}
+}
+
+function renderMD(t){
+  return t.replace(/^#{1,3} (.+)$/gm,'<h2>$1</h2>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/^[-*] (.+)$/gm,'<li>$1</li>').replace(/(<li>[\s\S]*?<\/li>)(\n<li>)/g,'$1$2').replace(/(<li>.*<\/li>\n?)+/gs,m=>`<ul>${m}</ul>`).split('\n\n').map(p=>p.startsWith('<')?p:`<p>${p}</p>`).join('');
+}
+
+function doCopy(){
+  navigator.clipboard.writeText(document.getElementById('out-body').innerText).then(()=>{
+    const b=document.getElementById('copy-btn');b.textContent='Copied!';setTimeout(()=>b.textContent='Copy',2000);
+  });
+}
+
+function doPDF(){
+  if(!genText)return;
+  const{jsPDF}=window.jspdf;
+  const doc=new jsPDF({unit:'mm',format:'a4'});
+  const W=doc.internal.pageSize.getWidth(),H=doc.internal.pageSize.getHeight();
+  const mg=20,cW=W-mg*2;let y=0;
+  function foot(){const pg=doc.internal.getCurrentPageInfo().pageNumber;doc.setFontSize(8);doc.setTextColor(160,158,151);doc.setFont('helvetica','normal');doc.text('Ventura AI  ·  Business Plan  ·  Confidential',mg,H-10);doc.text(`Page ${pg}`,W-mg,H-10,{align:'right'});}
+  // Cover
+  doc.setFillColor(26,58,92);doc.rect(0,0,W,H,'F');
+  doc.setFillColor(200,146,58);doc.rect(0,H-6,W,6,'F');
+  doc.setFontSize(10);doc.setTextColor(180,200,220);doc.setFont('helvetica','bold');doc.text('VENTURA AI',mg,28);
+  doc.setFontSize(26);doc.setTextColor(255,255,255);
+  const tl=doc.splitTextToSize(bizName,cW);doc.text(tl,mg,75);
+  doc.setFontSize(13);doc.setTextColor(180,200,220);doc.setFont('helvetica','normal');doc.text('Business Plan',mg,75+tl.length*11+7);
+  const today=new Date().toLocaleDateString('en-GB',{year:'numeric',month:'long',day:'numeric'});
+  doc.setFontSize(9);doc.setTextColor(120,150,175);doc.text(`Generated ${today}  ·  Ventura AI`,mg,H-22);
+  doc.addPage();y=mg;foot();
+  for(const line of genText.split('\n')){
+    const l=line.trim();if(!l){y+=3;continue;}
+    if(y>H-22){doc.addPage();y=mg;foot();}
+    if(l.startsWith('## ')){y+=5;doc.setFillColor(232,239,247);doc.rect(mg,y-5,cW,11,'F');doc.setFontSize(11);doc.setTextColor(26,58,92);doc.setFont('helvetica','bold');doc.text(l.replace(/^## /,''),mg+3,y+2);y+=12;}
+    else if(l.startsWith('-')||l.startsWith('*')){const cl=l.replace(/^[-*] /,'').replace(/\*\*(.+?)\*\*/g,'$1');doc.setFontSize(9.5);doc.setTextColor(44,43,40);doc.setFont('helvetica','normal');doc.text('•',mg+2,y);const w=doc.splitTextToSize(cl,cW-10);doc.text(w,mg+8,y);y+=w.length*5.5+1;}
+    else{const cl=l.replace(/\*\*(.+?)\*\*/g,'$1');doc.setFontSize(9.5);doc.setTextColor(44,43,40);doc.setFont('helvetica','normal');const w=doc.splitTextToSize(cl,cW);doc.text(w,mg,y);y+=w.length*5.5+2;}
+  }
+  doc.save(bizName.toLowerCase().replace(/[^a-z0-9]+/g,'-')+'-plan.pdf');
+  const b=document.getElementById('pdf-btn');b.textContent='Downloaded!';setTimeout(()=>b.innerHTML='⬇ Download PDF',2000);
+}
+
+// CHECK RETURN FROM STRIPE
+function checkReturn(){
+  const params=new URLSearchParams(window.location.search);
+  if(params.get('paid')==='true'){
+    const p=params.get('plan')||'standard';
+    sv('ventura_paid','true');sv('ventura_plan',p);
+    window.history.replaceState({},'',window.location.pathname);
+  }
+  if(ld('ventura_paid')==='true'){
+    const p=ld('ventura_plan')||'standard';
+    setPlan(p);
+    document.getElementById('sbar').classList.add('on');
+    const saved=ld('ventura_form');
+    if(saved){
+      try{
+        const f=JSON.parse(saved);
+        if(p==='premium'&&f.chatHist){chatHist=f.chatHist;chatStep=f.chatStep||0;f.chatHist.forEach(m=>addBubble(m.role==='user'?'user':'ai',m.content));updProg();if(chatStep>=8)document.getElementById('btn-pro').classList.add('show');}
+        setTimeout(()=>doGenerate(p,f),400);
+      }catch(e){}
+    }
+  }
+}
+checkReturn();
+</script>
+</body>
+</html>
