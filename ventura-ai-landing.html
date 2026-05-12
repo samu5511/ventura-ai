@@ -262,44 +262,31 @@
 
   /* ── PRICING ── */
   .pricing-section { background: var(--white); }
-  .pricing-card {
-    max-width: 480px; margin: 3.5rem auto 0;
-    background: var(--cream); border: 2px solid var(--accent);
-    border-radius: 20px; padding: 3rem; text-align: center;
-    position: relative; overflow: hidden;
-  }
-  .pricing-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-  }
-  .pricing-best {
-    display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--accent2); background: rgba(200,146,58,0.12);
-    padding: 4px 14px; border-radius: 20px; margin-bottom: 1.5rem;
-  }
-  .pricing-price {
-    font-family: 'Playfair Display', serif;
-    font-size: 72px; font-weight: 500; color: var(--ink); line-height: 1;
-    margin-bottom: 4px;
-  }
-  .pricing-price sup { font-size: 28px; vertical-align: super; }
-  .pricing-desc { font-size: 14px; color: var(--muted); margin-bottom: 2rem; }
-  .pricing-features { list-style: none; text-align: left; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 12px; }
-  .pricing-features li { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--ink); }
-  .pricing-features li::before {
-    content: '✓'; width: 20px; height: 20px; background: #EAF3DE; color: #3B6D11;
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-size: 10px; font-weight: 700; flex-shrink: 0;
-  }
-  .pricing-cta {
-    display: block; width: 100%; padding: 16px;
-    background: var(--accent); color: white; border: none; border-radius: 10px;
-    font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500;
-    cursor: pointer; text-decoration: none; text-align: center;
-    transition: all 0.2s; box-shadow: 0 4px 20px rgba(26,58,92,0.25);
-  }
-  .pricing-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(26,58,92,0.35); }
-  .pricing-note { font-size: 12px; color: var(--muted); margin-top: 12px; }
+  .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; max-width: 860px; margin-left: auto; margin-right: auto; }
+  .pricing-card { background: var(--cream); border: 2px solid var(--border); border-radius: 20px; padding: 2.5rem; text-align: center; position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+  .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+  .pricing-card.featured { border-color: var(--accent2); }
+  .pricing-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--accent); }
+  .pricing-card.featured::before { background: linear-gradient(90deg, var(--accent2), #e8a84a); }
+  .pricing-best { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; margin-bottom: 1rem; }
+  .pricing-best.std { color: var(--accent); background: rgba(26,58,92,0.08); }
+  .pricing-best.pro { color: var(--accent2); background: rgba(200,146,58,0.12); }
+  .pricing-name { font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 500; color: var(--ink); margin-bottom: 0.5rem; }
+  .pricing-price { font-family: 'Playfair Display', serif; font-size: 62px; font-weight: 500; color: var(--ink); line-height: 1; margin-bottom: 4px; }
+  .pricing-price sup { font-size: 24px; vertical-align: super; }
+  .pricing-desc { font-size: 13px; color: var(--muted); margin-bottom: 1.5rem; }
+  .pricing-features { list-style: none; text-align: left; margin-bottom: 1.75rem; display: flex; flex-direction: column; gap: 10px; }
+  .pricing-features li { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ink); }
+  .pricing-features li::before { content: '✓'; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; flex-shrink: 0; }
+  .pricing-card:not(.featured) .pricing-features li::before { background: #EAF3DE; color: #3B6D11; }
+  .pricing-card.featured .pricing-features li::before { background: rgba(200,146,58,0.15); color: var(--accent2); }
+  .pricing-cta { display: block; width: 100%; padding: 14px; border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; text-decoration: none; text-align: center; transition: all 0.2s; }
+  .pricing-cta.std { background: var(--accent); color: white; box-shadow: 0 4px 20px rgba(26,58,92,0.25); }
+  .pricing-cta.std:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(26,58,92,0.35); }
+  .pricing-cta.pro { background: var(--accent2); color: white; box-shadow: 0 4px 20px rgba(200,146,58,0.3); }
+  .pricing-cta.pro:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,146,58,0.4); }
+  .pricing-note { font-size: 11px; color: var(--muted); margin-top: 10px; }
+  @media(max-width:700px){ .pricing-grid { grid-template-columns: 1fr; } }
 
   /* ── FAQ ── */
   .faq-list { margin-top: 3rem; max-width: 680px; }
@@ -608,30 +595,62 @@
 <section class="section pricing-section" id="pricing">
   <div class="reveal" style="text-align:center">
     <div class="section-eyebrow">Simple pricing</div>
-    <h2 class="section-title">One plan. One price. <em>No surprises.</em></h2>
+    <h2 class="section-title">Two plans. One goal. <em>Your perfect plan.</em></h2>
+    <p style="font-size:15px;color:var(--muted);margin-top:0.75rem;font-weight:300">Choose the experience that fits you best. Both include a full business plan PDF.</p>
   </div>
-  <div class="pricing-card reveal">
-    <div class="pricing-best">Most popular</div>
-    <div class="pricing-price"><sup>€</sup>29</div>
-    <div class="pricing-desc">One-time payment · Instant delivery · No subscription</div>
-    <ul class="pricing-features">
-      <li>Complete 11-section business plan</li>
-      <li>3-year financial projections</li>
-      <li>Market analysis & competitive landscape</li>
-      <li>Branded PDF with cover page</li>
-      <li>Ready for banks & investors</li>
-      <li>Generated in under 30 seconds</li>
-    </ul>
-    <a class="pricing-cta" href="ventura-ai.html">Generate my business plan →</a>
-    <div class="pricing-note">🔒 Secured by Stripe · Instant access after payment</div>
-    <div style="margin-top: 14px; text-align: center;">
-      <a href="golden-crust-sample-plan.pdf" download style="font-size: 12px; color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: color 0.2s;">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
-        See a sample plan before you buy →
-      </a>
+  <div class="pricing-grid">
+
+    <!-- STANDARD -->
+    <div class="pricing-card reveal">
+      <div class="pricing-best std">Standard</div>
+      <div class="pricing-name">Business Plan</div>
+      <div class="pricing-price"><sup>€</sup>29</div>
+      <div class="pricing-desc">One-time · Instant delivery · No subscription</div>
+      <ul class="pricing-features">
+        <li>Detailed form with your real data</li>
+        <li>Complete 11-section business plan</li>
+        <li>3-year financial projections</li>
+        <li>Market analysis & competitive landscape</li>
+        <li>Branded PDF with cover page</li>
+        <li>Ready for banks & investors</li>
+      </ul>
+      <a class="pricing-cta std" href="ventura-ai.html">Get Standard Plan →</a>
+      <div class="pricing-note">🔒 Secured by Stripe · Instant access</div>
+      <div style="margin-top:12px;text-align:center">
+        <a href="golden-crust-sample-plan.pdf" download style="font-size:12px;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:5px">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+          See a sample plan →
+        </a>
+      </div>
     </div>
+
+    <!-- PREMIUM -->
+    <div class="pricing-card featured reveal">
+      <div class="pricing-best pro">⭐ Premium</div>
+      <div class="pricing-name">AI Consultant</div>
+      <div class="pricing-price"><sup>€</sup>49</div>
+      <div class="pricing-desc">One-time · Personalised interview · No subscription</div>
+      <ul class="pricing-features">
+        <li>1-on-1 AI consultant interview</li>
+        <li>AI asks the right questions</li>
+        <li>Deeper, more personalised plan</li>
+        <li>Complete 11-section business plan</li>
+        <li>3-year financial projections</li>
+        <li>Branded PDF with cover page</li>
+      </ul>
+      <a class="pricing-cta pro" href="ventura-ai.html?plan=premium">Get Premium Plan →</a>
+      <div class="pricing-note">🔒 Secured by Stripe · Instant access</div>
+      <div style="margin-top:12px;text-align:center">
+        <a href="golden-crust-sample-plan.pdf" download style="font-size:12px;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:5px">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+          See a sample plan →
+        </a>
+      </div>
+    </div>
+
   </div>
 </section>
+
 
 <!-- FAQ -->
 <section class="section" id="faq">
