@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ventura AI — Professional Business Plans in Seconds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0b;
+    --cream: #f7f4ee;
+    --warm: #ede9e0;
+    --accent: #1a3a5c;
+    --accent2: #c8923a;
+    --muted: #7a7670;
+    --border: #ddd9d0;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem; height: 64px;
+    background: rgba(247,244,238,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 500; color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo-mark {
+    width: 32px; height: 32px; background: var(--accent);
+    border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  }
+  .nav-logo-mark svg { width: 16px; height: 16px; fill: white; }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-links a { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    font-size: 13px; font-weight: 500; padding: 8px 20px;
+    background: var(--accent); color: white; border-radius: 6px;
+    text-decoration: none; transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 80px 3rem 0;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-left { padding-top: 2rem; }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent2);
+    background: rgba(200,146,58,0.1); padding: 5px 12px;
+    border-radius: 20px; margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; }
+
+  .hero-h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 5vw, 62px);
+    font-weight: 500; line-height: 1.1;
+    letter-spacing: -0.02em; color: var(--ink);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-h1 em { font-style: italic; color: var(--accent); }
+  .hero-h1 .line2 { display: block; }
+
+  .hero-sub {
+    font-size: 17px; font-weight: 300; color: var(--muted);
+    line-height: 1.7; margin-bottom: 2.5rem; max-width: 480px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 32px; background: var(--accent); color: white;
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+    border-radius: 8px; text-decoration: none; transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(26,58,92,0.25);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(26,58,92,0.35); }
+  .btn-primary svg { width: 16px; height: 16px; }
+  .btn-secondary {
+    font-size: 14px; font-weight: 400; color: var(--muted);
+    text-decoration: none; display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--ink); }
+
+  .hero-trust {
+    margin-top: 2.5rem; display: flex; align-items: center; gap: 1.5rem;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .trust-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); }
+  .trust-item svg { width: 14px; height: 14px; color: var(--accent2); }
+  .trust-divider { width: 1px; height: 16px; background: var(--border); }
+
+  /* HERO RIGHT — DOCUMENT MOCKUP */
+  .hero-right {
+    position: relative;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .doc-card {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+    overflow: hidden;
+    transform: rotate(1.5deg);
+    transition: transform 0.4s ease;
+  }
+  .doc-card:hover { transform: rotate(0deg); }
+  .doc-header {
+    background: var(--accent); padding: 2rem 2rem 1.5rem;
+    color: white;
+  }
+  .doc-header-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.6; margin-bottom: 8px; }
+  .doc-header-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; margin-bottom: 4px; }
+  .doc-header-sub { font-size: 12px; opacity: 0.65; }
+  .doc-body { padding: 1.5rem 2rem; }
+  .doc-section { margin-bottom: 1.25rem; }
+  .doc-section-title {
+    font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--warm);
+  }
+  .doc-line { height: 8px; background: var(--warm); border-radius: 4px; margin-bottom: 6px; }
+  .doc-line.short { width: 65%; }
+  .doc-line.med { width: 82%; }
+  .doc-line.long { width: 95%; }
+  .doc-line.accent { background: rgba(26,58,92,0.1); }
+  .doc-badge {
+    position: absolute; top: -16px; right: -16px;
+    width: 80px; height: 80px; background: var(--accent2);
+    border-radius: 50%; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; color: white;
+    box-shadow: 0 8px 24px rgba(200,146,58,0.4);
+    transform: rotate(-8deg);
+  }
+  .doc-badge-price { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; line-height: 1; }
+  .doc-badge-label { font-size: 9px; font-weight: 500; opacity: 0.85; }
+  .doc-float {
+    position: absolute; bottom: -20px; left: -24px;
+    background: white; border-radius: 12px;
+    padding: 12px 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    display: flex; align-items: center; gap: 10px;
+    animation: float 3s ease-in-out infinite;
+  }
+  .doc-float-icon { width: 32px; height: 32px; background: #EAF3DE; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .doc-float-text { font-size: 12px; font-weight: 500; color: var(--ink); }
+  .doc-float-sub { font-size: 10px; color: var(--muted); }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+  /* ── LOGOS BAR ── */
+  .logos-bar {
+    background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 1.25rem 3rem; text-align: center;
+  }
+  .logos-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+  .logos-row { display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+  .logo-pill {
+    font-size: 13px; font-weight: 500; color: var(--muted);
+    padding: 6px 16px; border: 1px solid var(--border); border-radius: 20px;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .section { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
+  .section-eyebrow { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2); font-weight: 500; margin-bottom: 1rem; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 44px); font-weight: 500;
+    line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem;
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .section-sub { font-size: 16px; font-weight: 300; color: var(--muted); line-height: 1.7; max-width: 520px; }
+
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; }
+  .step-card {
+    background: var(--white); border-radius: 16px; padding: 2rem;
+    border: 1px solid var(--border); position: relative; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .step-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+  .step-num {
+    font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 700;
+    color: var(--warm); position: absolute; top: -8px; right: 16px; line-height: 1;
+    user-select: none;
+  }
+  .step-icon { font-size: 28px; margin-bottom: 1.25rem; }
+  .step-title { font-size: 16px; font-weight: 500; margin-bottom: 8px; color: var(--ink); }
+  .step-desc { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.6; }
+
+  /* ── WHAT YOU GET ── */
+  .features-section { background: var(--accent); color: white; padding: 6rem 3rem; }
+  .features-inner { max-width: 1100px; margin: 0 auto; }
+  .features-section .section-eyebrow { color: rgba(255,255,255,0.5); }
+  .features-section .section-title { color: white; }
+  .features-section .section-title em { color: var(--accent2); }
+  .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
+  .feature-card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px; padding: 1.5rem;
+    transition: background 0.2s;
+  }
+  .feature-card:hover { background: rgba(255,255,255,0.1); }
+  .feature-icon { font-size: 24px; margin-bottom: 1rem; }
+  .feature-title { font-size: 14px; font-weight: 500; margin-bottom: 6px; color: white; }
+  .feature-desc { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
+  .testimonial {
+    background: var(--white); border-radius: 16px; padding: 1.75rem;
+    border: 1px solid var(--border);
+    transition: transform 0.2s;
+  }
+  .testimonial:hover { transform: translateY(-3px); }
+  .stars { color: var(--accent2); font-size: 14px; margin-bottom: 1rem; letter-spacing: 2px; }
+  .testimonial-text { font-size: 14px; font-weight: 300; color: var(--ink); line-height: 1.7; margin-bottom: 1.25rem; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 10px; }
+  .author-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--accent); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 500; flex-shrink: 0;
+  }
+  .author-name { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .author-role { font-size: 11px; color: var(--muted); }
+
+  /* ── PRICING ── */
+  .pricing-section { background: var(--white); }
+  .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; max-width: 860px; margin-left: auto; margin-right: auto; }
+  .pricing-card { background: var(--cream); border: 2px solid var(--border); border-radius: 20px; padding: 2.5rem; text-align: center; position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+  .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+  .pricing-card.featured { border-color: var(--accent2); }
+  .pricing-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--accent); }
+  .pricing-card.featured::before { background: linear-gradient(90deg, var(--accent2), #e8a84a); }
+  .pricing-best { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; margin-bottom: 1rem; }
+  .pricing-best.std { color: var(--accent); background: rgba(26,58,92,0.08); }
+  .pricing-best.pro { color: var(--accent2); background: rgba(200,146,58,0.12); }
+  .pricing-name { font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 500; color: var(--ink); margin-bottom: 0.5rem; }
+  .pricing-price { font-family: 'Playfair Display', serif; font-size: 62px; font-weight: 500; color: var(--ink); line-height: 1; margin-bottom: 4px; }
+  .pricing-price sup { font-size: 24px; vertical-align: super; }
+  .pricing-desc { font-size: 13px; color: var(--muted); margin-bottom: 1.5rem; }
+  .pricing-features { list-style: none; text-align: left; margin-bottom: 1.75rem; display: flex; flex-direction: column; gap: 10px; }
+  .pricing-features li { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ink); }
+  .pricing-features li::before { content: '✓'; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; flex-shrink: 0; }
+  .pricing-card:not(.featured) .pricing-features li::before { background: #EAF3DE; color: #3B6D11; }
+  .pricing-card.featured .pricing-features li::before { background: rgba(200,146,58,0.15); color: var(--accent2); }
+  .pricing-cta { display: block; width: 100%; padding: 14px; border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; text-decoration: none; text-align: center; transition: all 0.2s; }
+  .pricing-cta.std { background: var(--accent); color: white; box-shadow: 0 4px 20px rgba(26,58,92,0.25); }
+  .pricing-cta.std:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(26,58,92,0.35); }
+  .pricing-cta.pro { background: var(--accent2); color: white; box-shadow: 0 4px 20px rgba(200,146,58,0.3); }
+  .pricing-cta.pro:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,146,58,0.4); }
+  .pricing-note { font-size: 11px; color: var(--muted); margin-top: 10px; }
+  @media(max-width:700px){ .pricing-grid { grid-template-columns: 1fr; } }
+
+  /* ── FAQ ── */
+  .faq-list { margin-top: 3rem; max-width: 680px; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 0; cursor: pointer; font-size: 15px; font-weight: 500;
+    color: var(--ink); gap: 1rem;
+    background: none; border: none; width: 100%; text-align: left;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .faq-q:hover { color: var(--accent); }
+  .faq-icon { font-size: 20px; color: var(--muted); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-a { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.7; padding-bottom: 1.25rem; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    background: var(--ink); color: white;
+    text-align: center; padding: 7rem 3rem;
+  }
+  .final-cta .section-eyebrow { color: var(--accent2); }
+  .final-cta .section-title { color: white; max-width: 600px; margin: 0 auto 1.5rem; }
+  .final-cta .section-title em { color: var(--accent2); }
+  .final-cta-sub { font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.55); margin-bottom: 2.5rem; }
+  .final-cta .btn-primary { background: var(--accent2); box-shadow: 0 4px 24px rgba(200,146,58,0.4); }
+  .final-cta .btn-primary:hover { box-shadow: 0 8px 36px rgba(200,146,58,0.5); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 15px; color: rgba(255,255,255,0.4); }
+  .footer-logo span { color: rgba(255,255,255,0.6); }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  .lang-btn{font-size:12px;font-family:'DM Sans',sans-serif;font-weight:500;padding:5px 10px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.15s;}
+  .lang-btn.active{background:var(--accent);color:white;border-color:var(--accent);}
+  .lang-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .lang-btn.active:hover{color:white;}
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 100px; text-align: center; }
+    .hero-right { display: none; }
+    .hero-trust { justify-content: center; }
+    .hero-actions { justify-content: center; }
+    .steps-grid, .features-grid, .testimonials-grid { grid-template-columns: 1fr; }
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .section { padding: 4rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+    </div>
+    Ventura <span>AI</span>
+  </a>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#features">What you get</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="lang-btn active" onclick="setLang('en')" id="lb-en">🇬🇧 EN</button>
+    <button class="lang-btn" onclick="setLang('es')" id="lb-es">🇪🇸 ES</button>
+    <button class="lang-btn" onclick="setLang('de')" id="lb-de">🇩🇪 DE</button>
+    <a class="nav-cta" id="nav-cta" href="ventura-ai.html">Get my plan →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background: var(--cream);">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">AI-Powered · Instant · Professional</div>
+      <h1 class="hero-h1">
+        Your business plan,
+        <span class="line2"><em>written in seconds.</em></span>
+      </h1>
+      <p class="hero-sub">Stop spending weeks writing a business plan nobody will read. Ventura AI generates a complete, investor-ready PDF in under 30 seconds — for €29.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="ventura-ai.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Generate my plan — €29
+        </a>
+        <a class="btn-secondary" href="#how">See how it works ↓</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Secure payment
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 12l-4-4m4 4l4-4"/></svg>
+          Instant PDF download
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          Under 30 seconds
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div style="position: relative; padding: 20px 24px 40px 0;">
+        <div class="doc-card">
+          <div class="doc-header">
+            <div class="doc-header-label">Business Plan · Confidential</div>
+            <div class="doc-header-title">Golden Crust Bakery</div>
+            <div class="doc-header-sub">Generated by Ventura AI · May 2026</div>
+          </div>
+          <div class="doc-body">
+            <div class="doc-section">
+              <div class="doc-section-title">Executive Summary</div>
+              <div class="doc-line long accent"></div>
+              <div class="doc-line med"></div>
+              <div class="doc-line short"></div>
+            </div>
+            <div class="doc-section">
+              <div class="doc-section-title">Market Opportunity</div>
+              <div class="doc-line med accent"></div>
+              <div class="doc-line long"></div>
+              <div class="doc-line short"></div>
+            </div>
+            <div class="doc-section">
+              <div class="doc-section-title">Financial Projections</div>
+              <div class="doc-line long accent"></div>
+              <div class="doc-line med"></div>
+            </div>
+          </div>
+        </div>
+        <div class="doc-badge">
+          <div class="doc-badge-price">€29</div>
+          <div class="doc-badge-label">one-time</div>
+        </div>
+        <div class="doc-float">
+          <div class="doc-float-icon">✅</div>
+          <div>
+            <div class="doc-float-text">Plan generated!</div>
+            <div class="doc-float-sub">Ready to download as PDF</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<div class="logos-bar">
+  <div class="logos-label">Trusted by small business owners in</div>
+  <div class="logos-row">
+    <div class="logo-pill">🇩🇪 Germany</div>
+    <div class="logo-pill">🇵🇹 Portugal</div>
+    <div class="logo-pill">🇪🇸 Spain</div>
+    <div class="logo-pill">🇳🇱 Netherlands</div>
+    <div class="logo-pill">🇦🇹 Austria</div>
+    <div class="logo-pill">🇫🇷 France</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <div class="reveal">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title">Three steps to your <em>perfect plan</em></h2>
+    <p class="section-sub">No consultants, no templates to fill in for hours. Just describe your business and let AI do the rest.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card reveal">
+      <div class="step-num">1</div>
+      <div class="step-icon">✍️</div>
+      <div class="step-title">Describe your business</div>
+      <div class="step-desc">Fill in a simple form — your business name, what you do, your industry, and your goals. Takes under 2 minutes.</div>
+    </div>
+    <div class="step-card reveal" style="transition-delay:0.1s">
+      <div class="step-num">2</div>
+      <div class="step-icon">⚡</div>
+      <div class="step-title">AI writes your plan</div>
+      <div class="step-desc">Our AI generates a complete 11-section business plan with financial projections, market analysis, and strategy. Done in seconds.</div>
+    </div>
+    <div class="step-card reveal" style="transition-delay:0.2s">
+      <div class="step-num">3</div>
+      <div class="step-icon">📄</div>
+      <div class="step-title">Download your PDF</div>
+      <div class="step-desc">Get a branded, professional PDF ready to present to banks, investors, or partners. Looks like it took weeks to produce.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="features-section" id="features">
+  <div class="features-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">What you get</div>
+      <h2 class="section-title">Everything a bank or investor <em>actually wants</em></h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">📋</div>
+        <div class="feature-title">Executive Summary</div>
+        <div class="feature-desc">A compelling overview that hooks any reader in the first 30 seconds.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:0.05s">
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">Market Analysis</div>
+        <div class="feature-desc">TAM/SAM/SOM breakdown, trends, and competitive landscape.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:0.1s">
+        <div class="feature-icon">💰</div>
+        <div class="feature-title">Financial Projections</div>
+        <div class="feature-desc">3-year revenue forecast, cost breakdown, and profitability timeline.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:0.15s">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">Marketing Strategy</div>
+        <div class="feature-desc">A concrete go-to-market plan with channels, tactics, and first 100 customers.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:0.2s">
+        <div class="feature-icon">⚙️</div>
+        <div class="feature-title">Operations Plan</div>
+        <div class="feature-desc">Team structure, suppliers, technology, and day-to-day processes.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:0.25s">
+        <div class="feature-icon">🗺️</div>
+        <div class="feature-title">12-Month Roadmap</div>
+        <div class="feature-desc">Quarter-by-quarter milestones so you always know what comes next.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:0.3s">
+        <div class="feature-icon">⚠️</div>
+        <div class="feature-title">Risk Analysis</div>
+        <div class="feature-desc">Top 5 business risks with concrete mitigation strategies for each.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:0.35s">
+        <div class="feature-icon">📥</div>
+        <div class="feature-title">Branded PDF</div>
+        <div class="feature-desc">A polished, multi-page document with cover page, headers, and page numbers.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+  <div class="reveal">
+    <div class="section-eyebrow">What people are saying</div>
+    <h2 class="section-title">Real results from <em>real owners</em></h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"I needed a business plan for a bank loan and had no idea where to start. Ventura AI gave me something professional in literally 30 seconds. The bank approved my application."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">MR</div>
+        <div>
+          <div class="author-name">Maria R.</div>
+          <div class="author-role">Bakery owner, Lisbon</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial reveal" style="transition-delay:0.1s">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"I was quoted €800 by a consultant. Ventura AI did the same job for €29. The plan was detailed, realistic, and my investor was genuinely impressed."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">TK</div>
+        <div>
+          <div class="author-name">Thomas K.</div>
+          <div class="author-role">Startup founder, Berlin</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial reveal" style="transition-delay:0.2s">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Perfect for someone who knows their business but has no idea how to write a plan. It asked me the right questions and produced something I was proud to share."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SC</div>
+        <div>
+          <div class="author-name">Sofia C.</div>
+          <div class="author-role">Freelance designer, Barcelona</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section pricing-section" id="pricing">
+  <div class="reveal" style="text-align:center">
+    <div class="section-eyebrow">Simple pricing</div>
+    <h2 class="section-title">Two plans. One goal. <em>Your perfect plan.</em></h2>
+    <p style="font-size:15px;color:var(--muted);margin-top:0.75rem;font-weight:300">Choose the experience that fits you best. Both include a full business plan PDF.</p>
+  </div>
+  <div class="pricing-grid">
+
+    <!-- STANDARD -->
+    <div class="pricing-card reveal">
+      <div class="pricing-best std">Standard</div>
+      <div class="pricing-name">Business Plan</div>
+      <div class="pricing-price"><sup>€</sup>29</div>
+      <div class="pricing-desc">One-time · Instant delivery · No subscription</div>
+      <ul class="pricing-features">
+        <li>Detailed form with your real data</li>
+        <li>Complete 11-section business plan</li>
+        <li>3-year financial projections</li>
+        <li>Market analysis & competitive landscape</li>
+        <li>Branded PDF with cover page</li>
+        <li>Ready for banks & investors</li>
+      </ul>
+      <a class="pricing-cta std" href="ventura-ai.html">Get Standard Plan →</a>
+      <div class="pricing-note">🔒 Secured by Stripe · Instant access</div>
+      <div style="margin-top:12px;text-align:center">
+        <a href="golden-crust-sample-plan.pdf" download style="font-size:12px;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:5px">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+          See a sample plan →
+        </a>
+      </div>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="pricing-card featured reveal">
+      <div class="pricing-best pro">⭐ Premium</div>
+      <div class="pricing-name">AI Consultant</div>
+      <div class="pricing-price"><sup>€</sup>49</div>
+      <div class="pricing-desc">One-time · Personalised interview · No subscription</div>
+      <ul class="pricing-features">
+        <li>1-on-1 AI consultant interview</li>
+        <li>AI asks the right questions</li>
+        <li>Deeper, more personalised plan</li>
+        <li>Complete 11-section business plan</li>
+        <li>3-year financial projections</li>
+        <li>Branded PDF with cover page</li>
+      </ul>
+      <a class="pricing-cta pro" href="ventura-ai.html?plan=premium">Get Premium Plan →</a>
+      <div class="pricing-note">🔒 Secured by Stripe · Instant access</div>
+      <div style="margin-top:12px;text-align:center">
+        <a href="golden-crust-sample-plan.pdf" download style="font-size:12px;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:5px">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+          See a sample plan →
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="reveal">
+    <div class="section-eyebrow">FAQ</div>
+    <h2 class="section-title">Questions? <em>Answered.</em></h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Is this good enough for a real bank or investor?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Yes. The plan includes all sections a bank or investor expects — executive summary, market analysis, financial projections, risk analysis, and a 12-month roadmap. It's written in a professional tone designed for formal submission.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        How is this different from a free template?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Templates give you blank boxes to fill in. Ventura AI writes the actual content based on your specific business — the market analysis, the strategy, the projections. You get a finished document, not a starting point.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Can I edit the plan after it's generated?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Absolutely. You can copy the text from the app and paste it into Word or Google Docs to edit, add your logo, or adjust any numbers. The PDF is a starting point — most users tweak 10–20% of the content.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What if I'm not happy with the result?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">You can generate again with more detailed inputs and get a better result. The more specific you are about your business, the more tailored and impressive the output will be.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Is my payment secure?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Payments are processed entirely by Stripe, one of the world's most trusted payment platforms. We never see or store your card details.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="section-eyebrow">Get started today</div>
+  <h2 class="section-title">Stop procrastinating. <em>Start building.</em></h2>
+  <p class="final-cta-sub">Your business plan is 30 seconds away. For less than the price of dinner.</p>
+  <a class="btn-primary" href="ventura-ai.html">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    Generate my plan — €29
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Ventura <span>AI</span></div>
+  <div class="footer-copy">© 2026 Ventura AI · Professional business plans powered by AI · <a href="privacy.html" style="color:rgba(255,255,255,0.4);text-decoration:none;">Privacy Policy</a></div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+
+  // FAQ toggle
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+<script>
+const TL = {
+  en: {
+    navCta: 'Get my plan →',
+    eyebrow: 'AI-Powered Business Planning',
+    h1a: 'Your business plan,', h1b: 'written in seconds.',
+    hero_sub: 'Stop spending weeks writing a business plan nobody will read. Ventura AI generates a complete, investor-ready PDF in under 30 seconds — for €29.',
+    heroBtn: 'Generate my plan — €29',
+    heroSub2: 'See how it works ↓',
+    sampleLink: "Not sure what you'll get? Download a sample plan →",
+    trust1: 'Secure payment', trust2: 'Instant PDF download', trust3: 'Under 30 seconds',
+    logosLabel: 'Trusted by small business owners in',
+    howEye: 'How it works', howTitle: 'Three steps to your', howTitleEm: 'perfect plan',
+    howSub: 'No consultants, no templates to fill in for hours. Just describe your business and let AI do the rest.',
+    step1title: 'Describe your business', step1desc: 'Fill in a simple form — your business name, what you do, your industry, and your goals. Takes under 2 minutes.',
+    step2title: 'AI writes your plan', step2desc: 'Our AI generates a complete 11-section business plan with financial projections, market analysis, and strategy. Done in seconds.',
+    step3title: 'Download your PDF', step3desc: 'Get a branded, professional PDF ready to present to banks, investors, or partners. Looks like it took weeks to produce.',
+    featEye: 'What you get', featTitle: 'Everything a bank or investor', featTitleEm: 'actually wants',
+    t1: 'Executive Summary', t2: 'Market Analysis', t3: 'Financial Projections', t4: 'Marketing Strategy', t5: 'Operations Plan', t6: '12-Month Roadmap', t7: 'Risk Analysis', t8: 'Branded PDF',
+    d1: 'A compelling overview that hooks any reader in the first 30 seconds.', d2: 'TAM/SAM/SOM breakdown, trends, and competitive landscape.', d3: '3-year revenue forecast, cost breakdown, and profitability timeline.', d4: 'A concrete go-to-market plan with channels, tactics, and first 100 customers.', d5: 'Team structure, suppliers, technology, and day-to-day processes.', d6: 'Quarter-by-quarter milestones so you always know what comes next.', d7: 'Top 5 business risks with concrete mitigation strategies for each.', d8: 'A polished, multi-page document with cover page, headers, and page numbers.',
+    reviewEye: 'What people are saying', reviewTitle: 'Real results from', reviewTitleEm: 'real owners',
+    r1: '"I needed a business plan for a bank loan and had no idea where to start. Ventura AI gave me something professional in literally 30 seconds. The bank approved my application."',
+    r1name: 'Maria R.', r1role: 'Bakery owner, Lisbon',
+    r2: '"I was quoted €800 by a consultant. Ventura AI did the same job for €29. The plan was detailed, realistic, and my investor was genuinely impressed."',
+    r2name: 'Thomas K.', r2role: 'Startup founder, Berlin',
+    r3: '"Perfect for someone who knows their business but has no idea how to write a plan. It asked me the right questions and produced something I was proud to share."',
+    r3name: 'Sofia C.', r3role: 'Freelance designer, Barcelona',
+    priceEye: 'Simple pricing', priceTitle: 'Two plans. One goal.', priceTitleEm: 'Your perfect plan.',
+    priceSub: 'Choose the experience that fits you best. Both include a full business plan PDF.',
+    stdBadge: 'Standard', stdName: 'Business Plan', stdPrice: '€29', stdDesc: 'One-time · Instant delivery · No subscription',
+    stdF1:'Detailed form with your real data',stdF2:'Complete 11-section business plan',stdF3:'3-year financial projections',stdF4:'Market analysis & competitive landscape',stdF5:'Branded PDF with cover page',stdF6:'Ready for banks & investors',
+    stdBtn: 'Get Standard Plan →', stdNote: '🔒 Secured by Stripe · Instant access', stdSample: 'See a sample plan →',
+    proBadge: '⭐ Premium', proName: 'AI Consultant', proPrice: '€49', proDesc: 'One-time · Personalised interview · No subscription',
+    proF1:'1-on-1 AI consultant interview',proF2:'AI asks the right questions',proF3:'Deeper, more personalised plan',proF4:'Complete 11-section business plan',proF5:'3-year financial projections',proF6:'Branded PDF with cover page',
+    proBtn: 'Get Premium Plan →', proNote: '🔒 Secured by Stripe · Instant access', proSample: 'See a sample plan →',
+    faqEye: 'FAQ', faqTitle: 'Questions?', faqTitleEm: 'Answered.',
+    q1: 'Is this good enough for a real bank or investor?', a1: 'Yes. The plan includes all sections a bank or investor expects — executive summary, market analysis, financial projections, risk analysis, and a 12-month roadmap. It\'s written in a professional tone designed for formal submission.',
+    q2: 'How is this different from a free template?', a2: 'Templates give you blank boxes to fill in. Ventura AI writes the actual content based on your specific business — the market analysis, the strategy, the projections. You get a finished document, not a starting point.',
+    q3: 'Can I edit the plan after it\'s generated?', a3: 'Absolutely. You can copy the text from the app and paste it into Word or Google Docs to edit, add your logo, or adjust any numbers.',
+    q4: 'What if I\'m not happy with the result?', a4: 'You can generate again with more detailed inputs and get a better result. The more specific you are about your business, the more tailored and impressive the output will be.',
+    q5: 'Is my payment secure?', a5: 'Payments are processed entirely by Stripe, one of the world\'s most trusted payment platforms. We never see or store your card details.',
+    ctaEye: 'Get started today', ctaTitle: 'Stop procrastinating.', ctaTitleEm: 'Start building.',
+    ctaSub: 'Your business plan is 30 seconds away. For less than the price of dinner.',
+    ctaBtn: 'Generate my plan — €29',
+    footerCopy: '© 2026 Ventura AI · Professional business plans powered by AI'
+  },
+  es: {
+    navCta: 'Crear mi plan →',
+    eyebrow: 'Planes de Negocio con IA',
+    h1a: 'Tu plan de negocio,', h1b: 'escrito en segundos.',
+    hero_sub: 'Deja de perder semanas escribiendo un plan de negocio. Ventura AI genera un PDF profesional y listo para inversores en menos de 30 segundos — por €29.',
+    heroBtn: 'Generar mi plan — €29',
+    heroSub2: 'Ver cómo funciona ↓',
+    sampleLink: '¿No sabes qué recibirás? Descarga un plan de ejemplo →',
+    trust1: 'Pago seguro', trust2: 'Descarga PDF al instante', trust3: 'En menos de 30 segundos',
+    logosLabel: 'Utilizado por pequeños empresarios en',
+    howEye: 'Cómo funciona', howTitle: 'Tres pasos hacia tu', howTitleEm: 'plan perfecto',
+    howSub: 'Sin consultores, sin plantillas que rellenar durante horas. Solo describe tu negocio y deja que la IA haga el resto.',
+    step1title: 'Describe tu negocio', step1desc: 'Rellena un formulario sencillo con el nombre de tu negocio, lo que haces, tu sector y tus objetivos. Tarda menos de 2 minutos.',
+    step2title: 'La IA escribe tu plan', step2desc: 'Nuestra IA genera un plan de negocio completo de 11 secciones con proyecciones financieras, análisis de mercado y estrategia. Listo en segundos.',
+    step3title: 'Descarga tu PDF', step3desc: 'Obtén un PDF profesional con tu marca, listo para presentar a bancos, inversores o socios. Parece que tardó semanas en producirse.',
+    featEye: 'Qué obtienes', featTitle: 'Todo lo que un banco o inversor', featTitleEm: 'realmente quiere',
+    t1:'Resumen Ejecutivo',t2:'Análisis de Mercado',t3:'Proyecciones Financieras',t4:'Estrategia de Marketing',t5:'Plan Operativo',t6:'Hoja de Ruta 12 Meses',t7:'Análisis de Riesgos',t8:'PDF con tu Marca',
+    d1:'Una presentación convincente que engancha a cualquier lector en los primeros 30 segundos.',d2:'Desglose TAM/SAM/SOM, tendencias y panorama competitivo.',d3:'Previsión de ingresos a 3 años, desglose de costes y cronograma de rentabilidad.',d4:'Plan de lanzamiento al mercado con canales, tácticas y primeros 100 clientes.',d5:'Estructura del equipo, proveedores, tecnología y procesos diarios.',d6:'Hitos trimestre a trimestre para que siempre sepas qué viene después.',d7:'Los 5 principales riesgos del negocio con estrategias de mitigación concretas.',d8:'Documento pulido de varias páginas con portada, encabezados y números de página.',
+    reviewEye:'Lo que dicen las personas',reviewTitle:'Resultados reales de',reviewTitleEm:'propietarios reales',
+    r1:'"Necesitaba un plan de negocio para un préstamo bancario y no sabía por dónde empezar. Ventura AI me dio algo profesional en literalmente 30 segundos. El banco aprobó mi solicitud."',
+    r1name:'Maria R.',r1role:'Propietaria de panadería, Lisboa',
+    r2:'"Me pidieron €800 por un consultor. Ventura AI hizo el mismo trabajo por €29. El plan era detallado, realista, y mi inversor quedó genuinamente impresionado."',
+    r2name:'Thomas K.',r2role:'Fundador de startup, Berlín',
+    r3:'"Perfecto para alguien que conoce su negocio pero no sabe cómo escribir un plan. Hizo las preguntas correctas y produjo algo de lo que me sentí orgulloso de compartir."',
+    r3name:'Sofia C.',r3role:'Diseñadora freelance, Barcelona',
+    priceEye:'Precios simples',priceTitle:'Dos planes. Un objetivo.',priceTitleEm:'Tu plan perfecto.',
+    priceSub:'Elige la experiencia que mejor se adapte a ti. Ambos incluyen un PDF completo del plan de negocio.',
+    stdBadge:'Estándar',stdName:'Plan de Negocio',stdPrice:'€29',stdDesc:'Pago único · Entrega inmediata · Sin suscripción',
+    stdF1:'Formulario detallado con tus datos reales',stdF2:'Plan completo de 11 secciones',stdF3:'Proyecciones financieras a 3 años',stdF4:'Análisis de mercado y competencia',stdF5:'PDF con portada y tu marca',stdF6:'Listo para bancos e inversores',
+    stdBtn:'Obtener Plan Estándar →',stdNote:'🔒 Seguro con Stripe · Acceso inmediato',stdSample:'Ver un plan de ejemplo →',
+    proBadge:'⭐ Premium',proName:'Consultor IA',proPrice:'€49',proDesc:'Pago único · Entrevista personalizada · Sin suscripción',
+    proF1:'Entrevista 1 a 1 con consultor IA',proF2:'La IA hace las preguntas correctas',proF3:'Plan más profundo y personalizado',proF4:'Plan completo de 11 secciones',proF5:'Proyecciones financieras a 3 años',proF6:'PDF con portada y tu marca',
+    proBtn:'Obtener Plan Premium →',proNote:'🔒 Seguro con Stripe · Acceso inmediato',proSample:'Ver un plan de ejemplo →',
+    faqEye:'Preguntas frecuentes',faqTitle:'¿Preguntas?',faqTitleEm:'Respondidas.',
+    q1:'¿Es suficientemente bueno para un banco real o un inversor?',a1:'Sí. El plan incluye todas las secciones que un banco o inversor espera — resumen ejecutivo, análisis de mercado, proyecciones financieras, análisis de riesgos y una hoja de ruta de 12 meses.',
+    q2:'¿En qué se diferencia de una plantilla gratuita?',a2:'Las plantillas te dan cajas en blanco para rellenar. Ventura AI escribe el contenido real basado en tu negocio específico — el análisis de mercado, la estrategia, las proyecciones. Obtienes un documento terminado.',
+    q3:'¿Puedo editar el plan después de generarlo?',a3:'Por supuesto. Puedes copiar el texto de la app y pegarlo en Word o Google Docs para editarlo, añadir tu logo o ajustar cualquier número.',
+    q4:'¿Qué pasa si no estoy satisfecho con el resultado?',a4:'Puedes generar de nuevo con información más detallada y obtener un mejor resultado. Cuanto más específico seas sobre tu negocio, más personalizado e impresionante será el resultado.',
+    q5:'¿Es seguro mi pago?',a5:'Los pagos son procesados íntegramente por Stripe, una de las plataformas de pago más confiables del mundo. Nunca vemos ni almacenamos los datos de tu tarjeta.',
+    ctaEye:'Empieza hoy',ctaTitle:'Deja de procrastinar.',ctaTitleEm:'Empieza a construir.',
+    ctaSub:'Tu plan de negocio está a 30 segundos. Por menos que el precio de una cena.',
+    ctaBtn:'Generar mi plan — €29',
+    footerCopy:'© 2026 Ventura AI · Planes de negocio profesionales con IA'
+  },
+  de: {
+    navCta: 'Meinen Plan erstellen →',
+    eyebrow: 'KI-gestützte Businessplanung',
+    h1a: 'Ihr Businessplan,', h1b: 'in Sekunden geschrieben.',
+    hero_sub: 'Hören Sie auf, wochenlang an einem Businessplan zu schreiben. Ventura AI erstellt ein vollständiges, investorenreifes PDF in unter 30 Sekunden — für €29.',
+    heroBtn: 'Meinen Plan erstellen — €29',
+    heroSub2: 'So funktioniert es ↓',
+    sampleLink: 'Nicht sicher, was Sie erhalten? Beispielplan herunterladen →',
+    trust1: 'Sichere Zahlung', trust2: 'Sofortiger PDF-Download', trust3: 'Unter 30 Sekunden',
+    logosLabel: 'Vertraut von kleinen Unternehmen in',
+    howEye:'So funktioniert es',howTitle:'Drei Schritte zu Ihrem',howTitleEm:'perfekten Plan',
+    howSub:'Keine Berater, keine stundenlangen Vorlagen. Beschreiben Sie einfach Ihr Unternehmen und lassen Sie die KI den Rest erledigen.',
+    step1title:'Beschreiben Sie Ihr Unternehmen',step1desc:'Füllen Sie ein einfaches Formular aus — Unternehmensname, was Sie tun, Ihre Branche und Ziele. Dauert unter 2 Minuten.',
+    step2title:'KI schreibt Ihren Plan',step2desc:'Unsere KI erstellt einen vollständigen 11-Abschnitte-Businessplan mit Finanzprognosen, Marktanalyse und Strategie. In Sekunden fertig.',
+    step3title:'PDF herunterladen',step3desc:'Erhalten Sie ein professionelles, gebrandetes PDF, das Sie Banken, Investoren oder Partnern vorlegen können.',
+    featEye:'Was Sie erhalten',featTitle:'Alles, was eine Bank oder ein Investor',featTitleEm:'wirklich möchte',
+    t1:'Zusammenfassung',t2:'Marktanalyse',t3:'Finanzprognosen',t4:'Marketingstrategie',t5:'Betriebsplan',t6:'12-Monats-Roadmap',t7:'Risikoanalyse',t8:'Gebrandetes PDF',
+    d1:'Eine überzeugende Übersicht, die jeden Leser in den ersten 30 Sekunden fesselt.',d2:'TAM/SAM/SOM-Aufschlüsselung, Trends und Wettbewerbslandschaft.',d3:'3-Jahres-Umsatzprognose, Kostenaufschlüsselung und Rentabilitätszeitplan.',d4:'Konkreter Go-to-Market-Plan mit Kanälen, Taktiken und ersten 100 Kunden.',d5:'Teamstruktur, Lieferanten, Technologie und tägliche Prozesse.',d6:'Quartalsweise Meilensteine, damit Sie immer wissen, was als nächstes kommt.',d7:'Top 5 Geschäftsrisiken mit konkreten Gegenmaßnahmen.',d8:'Poliertes mehrseitiges Dokument mit Titelseite, Überschriften und Seitenzahlen.',
+    reviewEye:'Was die Leute sagen',reviewTitle:'Echte Ergebnisse von',reviewTitleEm:'echten Unternehmern',
+    r1:'"Ich brauchte einen Businessplan für einen Bankkredit und wusste nicht, wo ich anfangen sollte. Ventura AI gab mir in buchstäblich 30 Sekunden etwas Professionelles. Die Bank genehmigte meinen Antrag."',
+    r1name:'Maria R.',r1role:'Bäckereibesitzerin, Lissabon',
+    r2:'"Ein Berater hat mir €800 berechnet. Ventura AI hat die gleiche Arbeit für €29 erledigt. Der Plan war detailliert, realistisch, und mein Investor war wirklich beeindruckt."',
+    r2name:'Thomas K.',r2role:'Startup-Gründer, Berlin',
+    r3:'"Perfekt für jemanden, der sein Unternehmen kennt, aber keine Ahnung hat, wie man einen Plan schreibt. Es stellte die richtigen Fragen und produzierte etwas, das ich stolz teilen konnte."',
+    r3name:'Sofia C.',r3role:'Freelance-Designerin, Barcelona',
+    priceEye:'Einfache Preise',priceTitle:'Zwei Pläne. Ein Ziel.',priceTitleEm:'Ihr perfekter Plan.',
+    priceSub:'Wählen Sie das Erlebnis, das am besten zu Ihnen passt. Beide beinhalten ein vollständiges Businessplan-PDF.',
+    stdBadge:'Standard',stdName:'Businessplan',stdPrice:'€29',stdDesc:'Einmalig · Sofortige Lieferung · Kein Abonnement',
+    stdF1:'Detailliertes Formular mit Ihren echten Daten',stdF2:'Vollständiger Plan mit 11 Abschnitten',stdF3:'3-Jahres-Finanzprognosen',stdF4:'Marktanalyse & Wettbewerbslandschaft',stdF5:'Gebrandetes PDF mit Titelseite',stdF6:'Bereit für Banken & Investoren',
+    stdBtn:'Standard-Plan erhalten →',stdNote:'🔒 Gesichert durch Stripe · Sofortiger Zugang',stdSample:'Beispielplan ansehen →',
+    proBadge:'⭐ Premium',proName:'KI-Berater',proPrice:'€49',proDesc:'Einmalig · Personalisiertes Interview · Kein Abonnement',
+    proF1:'1-zu-1 KI-Berater-Interview',proF2:'KI stellt die richtigen Fragen',proF3:'Tieferer, personalisierterer Plan',proF4:'Vollständiger Plan mit 11 Abschnitten',proF5:'3-Jahres-Finanzprognosen',proF6:'Gebrandetes PDF mit Titelseite',
+    proBtn:'Premium-Plan erhalten →',proNote:'🔒 Gesichert durch Stripe · Sofortiger Zugang',proSample:'Beispielplan ansehen →',
+    faqEye:'Häufige Fragen',faqTitle:'Fragen?',faqTitleEm:'Beantwortet.',
+    q1:'Ist das gut genug für eine echte Bank oder einen Investor?',a1:'Ja. Der Plan enthält alle Abschnitte, die eine Bank oder ein Investor erwartet — Zusammenfassung, Marktanalyse, Finanzprognosen, Risikoanalyse und eine 12-Monats-Roadmap.',
+    q2:'Was unterscheidet das von einer kostenlosen Vorlage?',a2:'Vorlagen geben Ihnen leere Kästchen zum Ausfüllen. Ventura AI schreibt den eigentlichen Inhalt basierend auf Ihrem spezifischen Unternehmen — die Marktanalyse, die Strategie, die Prognosen.',
+    q3:'Kann ich den Plan nach der Erstellung bearbeiten?',a3:'Absolut. Sie können den Text aus der App kopieren und in Word oder Google Docs einfügen, um ihn zu bearbeiten.',
+    q4:'Was ist, wenn ich mit dem Ergebnis nicht zufrieden bin?',a4:'Sie können mit detaillierteren Eingaben erneut generieren und ein besseres Ergebnis erzielen.',
+    q5:'Ist meine Zahlung sicher?',a5:'Zahlungen werden vollständig von Stripe abgewickelt, einer der vertrauenswürdigsten Zahlungsplattformen der Welt.',
+    ctaEye:'Heute starten',ctaTitle:'Hören Sie auf zu zögern.',ctaTitleEm:'Fangen Sie an zu bauen.',
+    ctaSub:'Ihr Businessplan ist 30 Sekunden entfernt. Für weniger als den Preis eines Abendessens.',
+    ctaBtn:'Meinen Plan erstellen — €29',
+    footerCopy:'© 2026 Ventura AI · Professionelle Businesspläne mit KI'
+  }
+};
+
+let langL = 'en';
+
+function setLang(l) {
+  langL = l;
+  ['en','es','de'].forEach(x => {
+    const b = document.getElementById('lb-'+x);
+    if(b) b.classList.toggle('active', x===l);
+  });
+  const t = TL[l] || TL.en;
+
+  // Helper
+  const set = (sel, txt) => { const el = document.querySelector(sel); if(el) el.textContent = txt; };
+  const setHTML = (sel, html) => { const el = document.querySelector(sel); if(el) el.innerHTML = html; };
+  const setAttr = (sel, attr, val) => { const el = document.querySelector(sel); if(el) el[attr] = val; };
+
+  // Nav
+  const nc = document.getElementById('nav-cta'); if(nc) nc.textContent = t.navCta;
+
+  // Hero
+  set('.hero-eyebrow', t.eyebrow);
+  const h1 = document.querySelector('.hero-h1');
+  if(h1) h1.innerHTML = t.h1a + '<span class="line2"><em>' + t.h1b + '</em></span>';
+  set('.hero p', t.hero_sub);
+  const heroBtn = document.querySelector('.btn-primary');
+  if(heroBtn) heroBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> ' + t.heroBtn;
+  const heroSub = document.querySelector('.btn-secondary');
+  if(heroSub) heroSub.textContent = t.heroSub2;
+  const sampleA = document.querySelector('[href="golden-crust-sample-plan.pdf"]');
+  if(sampleA) sampleA.textContent = t.sampleLink;
+
+  // Trust
+  const trustItems = document.querySelectorAll('.trust-item');
+  if(trustItems[0]) trustItems[0].lastChild.textContent = ' ' + t.trust1;
+  if(trustItems[1]) trustItems[1].lastChild.textContent = ' ' + t.trust2;
+  if(trustItems[2]) trustItems[2].lastChild.textContent = ' ' + t.trust3;
+
+  // Logos bar
+  set('.logos-label', t.logosLabel);
+
+  // How it works
+  const how = document.getElementById('how');
+  if(how) {
+    const eyebrow = how.querySelector('.section-eyebrow'); if(eyebrow) eyebrow.textContent = t.howEye;
+    const title = how.querySelector('.section-title');
+    if(title) title.innerHTML = t.howTitle + ' <em>' + t.howTitleEm + '</em>';
+    set('#how .section-sub', t.howSub);
+    const steps = how.querySelectorAll('.step-card');
+    const stepData = [[t.step1title,t.step1desc],[t.step2title,t.step2desc],[t.step3title,t.step3desc]];
+    steps.forEach((s,i) => {
+      if(stepData[i]) {
+        const title = s.querySelector('.step-title'); if(title) title.textContent = stepData[i][0];
+        const desc = s.querySelector('.step-desc'); if(desc) desc.textContent = stepData[i][1];
+      }
+    });
+  }
+
+  // Features
+  const feat = document.getElementById('features');
+  if(feat) {
+    const ey = feat.querySelector('.section-eyebrow'); if(ey) ey.textContent = t.featEye;
+    const ti = feat.querySelector('.section-title');
+    if(ti) ti.innerHTML = t.featTitle + ' <em>' + t.featTitleEm + '</em>';
+    const cards = feat.querySelectorAll('.feature-card');
+    const featData = [[t.t1,t.d1],[t.t2,t.d2],[t.t3,t.d3],[t.t4,t.d4],[t.t5,t.d5],[t.t6,t.d6],[t.t7,t.d7],[t.t8,t.d8]];
+    cards.forEach((c,i) => {
+      if(featData[i]) {
+        const ft = c.querySelector('.feature-title'); if(ft) ft.textContent = featData[i][0];
+        const fd = c.querySelector('.feature-desc'); if(fd) fd.textContent = featData[i][1];
+      }
+    });
+  }
+
+  // Testimonials
+  const testi = document.getElementById('testimonials');
+  if(testi) {
+    const ey = testi.querySelector('.section-eyebrow'); if(ey) ey.textContent = t.reviewEye;
+    const ti = testi.querySelector('.section-title');
+    if(ti) ti.innerHTML = t.reviewTitle + ' <em>' + t.reviewTitleEm + '</em>';
+    const cards = testi.querySelectorAll('.testimonial');
+    const testiData = [[t.r1,t.r1name,t.r1role],[t.r2,t.r2name,t.r2role],[t.r3,t.r3name,t.r3role]];
+    cards.forEach((c,i) => {
+      if(testiData[i]) {
+        const txt = c.querySelector('.testimonial-text'); if(txt) txt.textContent = testiData[i][0];
+        const name = c.querySelector('.author-name'); if(name) name.textContent = testiData[i][1];
+        const role = c.querySelector('.author-role'); if(role) role.textContent = testiData[i][2];
+      }
+    });
+  }
+
+  // Pricing
+  const pricing = document.getElementById('pricing');
+  if(pricing) {
+    const ey = pricing.querySelector('.section-eyebrow'); if(ey) ey.textContent = t.priceEye;
+    const ti = pricing.querySelector('.section-title');
+    if(ti) ti.innerHTML = t.priceTitle + ' <em>' + t.priceTitleEm + '</em>';
+    const sub = pricing.querySelector('p[style]'); if(sub) sub.textContent = t.priceSub;
+    const cards = pricing.querySelectorAll('.pricing-card');
+    if(cards[0]) {
+      const b = cards[0].querySelector('.pricing-best'); if(b) b.textContent = t.stdBadge;
+      const n = cards[0].querySelector('.pricing-name'); if(n) n.textContent = t.stdName;
+      const p = cards[0].querySelector('.pricing-price'); if(p) p.innerHTML = '<sup>€</sup>' + t.stdPrice.replace('€','');
+      const d = cards[0].querySelector('.pricing-desc'); if(d) d.textContent = t.stdDesc;
+      const feats = cards[0].querySelectorAll('.pricing-features li');
+      [t.stdF1,t.stdF2,t.stdF3,t.stdF4,t.stdF5,t.stdF6].forEach((f,i) => { if(feats[i]) feats[i].textContent = f; });
+      const btn = cards[0].querySelector('.pricing-cta'); if(btn) btn.textContent = t.stdBtn;
+      const note = cards[0].querySelector('.pricing-note'); if(note) note.textContent = t.stdNote;
+    }
+    if(cards[1]) {
+      const b = cards[1].querySelector('.pricing-best'); if(b) b.textContent = t.proBadge;
+      const n = cards[1].querySelector('.pricing-name'); if(n) n.textContent = t.proName;
+      const p = cards[1].querySelector('.pricing-price'); if(p) p.innerHTML = '<sup>€</sup>' + t.proPrice.replace('€','');
+      const d = cards[1].querySelector('.pricing-desc'); if(d) d.textContent = t.proDesc;
+      const feats = cards[1].querySelectorAll('.pricing-features li');
+      [t.proF1,t.proF2,t.proF3,t.proF4,t.proF5,t.proF6].forEach((f,i) => { if(feats[i]) feats[i].textContent = f; });
+      const btn = cards[1].querySelector('.pricing-cta'); if(btn) btn.textContent = t.proBtn;
+      const note = cards[1].querySelector('.pricing-note'); if(note) note.textContent = t.proNote;
+    }
+  }
+
+  // FAQ
+  const faqSec = document.getElementById('faq');
+  if(faqSec) {
+    const ey = faqSec.querySelector('.section-eyebrow'); if(ey) ey.textContent = t.faqEye;
+    const ti = faqSec.querySelector('.section-title');
+    if(ti) ti.innerHTML = t.faqTitle + ' <em>' + t.faqTitleEm + '</em>';
+    const items = faqSec.querySelectorAll('.faq-item');
+    const faqData = [[t.q1,t.a1],[t.q2,t.a2],[t.q3,t.a3],[t.q4,t.a4],[t.q5,t.a5]];
+    items.forEach((item,i) => {
+      if(faqData[i]) {
+        const q = item.querySelector('.faq-q'); if(q) q.childNodes[0].textContent = faqData[i][0];
+        const a = item.querySelector('.faq-a'); if(a) a.textContent = faqData[i][1];
+      }
+    });
+  }
+
+  // Final CTA
+  const cta = document.querySelector('.final-cta');
+  if(cta) {
+    const ey = cta.querySelector('.section-eyebrow'); if(ey) ey.textContent = t.ctaEye;
+    const ti = cta.querySelector('.section-title');
+    if(ti) ti.innerHTML = t.ctaTitle + ' <em>' + t.ctaTitleEm + '</em>';
+    const sub2 = cta.querySelector('.final-cta-sub'); if(sub2) sub2.textContent = t.ctaSub;
+    const btn = cta.querySelector('.btn-primary');
+    if(btn) btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> ' + t.ctaBtn;
+  }
+
+  // Footer
+  const ft = document.querySelector('.footer-copy');
+  if(ft) ft.innerHTML = t.footerCopy + ' · <a href="privacy.html" style="color:rgba(255,255,255,0.4);text-decoration:none;">Privacy Policy</a>';
+
+  // Pass language to app page via localStorage
+  try { localStorage.setItem('ventura_lang', l); } catch(e) {}
+}
+
+// Auto-detect
+const bl = navigator.language.slice(0,2);
+if(bl === 'es') setLang('es');
+else if(bl === 'de') setLang('de');
+else setLang('en');
+</script>
+</body>
+</html>
